@@ -1,4 +1,9 @@
-﻿  ModulePlayer.cpp
+﻿  ModuleSceneIntro.cpp
+c:\users\marc lf\desktop\pinup_pinball-master\modulesceneintro.cpp(94): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\marc lf\desktop\pinup_pinball-master\modulesceneintro.cpp(169): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marc lf\desktop\pinup_pinball-master\modulesceneintro.cpp(171): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marc lf\desktop\pinup_pinball-master\modulesceneintro.cpp(173): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\marc lf\desktop\pinup_pinball-master\modulesceneintro.cpp(176): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(210): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  SDL Game.vcxproj -> C:\Users\Gerad\Downloads\PinUp_Pinball-894e64eb00b62f732bc2d8d47e26e0c307db505f\PinUp_Pinball-894e64eb00b62f732bc2d8d47e26e0c307db505f\Debug\2D Physics - class 4.exe
-  SDL Game.vcxproj -> C:\Users\Gerad\Downloads\PinUp_Pinball-894e64eb00b62f732bc2d8d47e26e0c307db505f\PinUp_Pinball-894e64eb00b62f732bc2d8d47e26e0c307db505f\Debug\2D Physics - class 4.pdb (Full PDB)
+  SDL Game.vcxproj -> C:\Users\Marc LF\Desktop\PinUp_Pinball-master\Debug\2D Physics - class 4.exe
+  SDL Game.vcxproj -> C:\Users\Marc LF\Desktop\PinUp_Pinball-master\Debug\2D Physics - class 4.pdb (Full PDB)

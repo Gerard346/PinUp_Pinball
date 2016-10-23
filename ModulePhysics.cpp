@@ -56,7 +56,7 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn )
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn)
 {
 	b2BodyDef body;
 	if (is_dyn)
@@ -84,7 +84,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn )
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bool is_dyn)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bool is_dyn, SDL_Texture* text)
 {
 	b2BodyDef body;
 	if (is_dyn)
@@ -108,7 +108,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bo
 	b->SetUserData(pbody);
 	pbody->width = width * 0.5f;
 	pbody->height = height * 0.5f;
-
+	pbody->texture = text;
 	return pbody;
 }
 
@@ -175,6 +175,24 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool i
 
 	return pbody;
 }
+
+b2RevoluteJoint* ModulePhysics::CreateRevolutionJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle)
+{
+	b2RevoluteJointDef revoluteJointDef;
+	revoluteJointDef.bodyA = bodyA->body;
+	revoluteJointDef.bodyB = bodyB->body;
+	revoluteJointDef.collideConnected = false;
+	revoluteJointDef.localAnchorA.Set(localAnchorA_x, localAnchorA_y);
+	revoluteJointDef.localAnchorB.Set(localAnchorB_x, localAnchorB_y);
+	revoluteJointDef.referenceAngle = reference_angle;
+	revoluteJointDef.enableLimit = true;
+	revoluteJointDef.lowerAngle = lower_angle*DEGTORAD;
+	revoluteJointDef.upperAngle = upper_angle*DEGTORAD;
+
+	b2RevoluteJoint* rev_joint = (b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef);
+	return rev_joint;
+}
+
 // 
 update_status ModulePhysics::PostUpdate()
 {

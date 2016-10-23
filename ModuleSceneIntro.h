@@ -29,8 +29,29 @@ public:
 	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* map_texture;
+	SDL_Texture* Lever_L;
+	SDL_Texture* Lever_R;
+
+	p2List_item<PhysBody*>* flips_start;
+
+	PhysBody* P_Lever_L;
+	PhysBody* P_Lever_R;
+
+	PhysBody* PivotLever_L;
+	PhysBody* PivotLever_R;
+
+	PhysBody* BodyLever_L;
+	PhysBody* BodyLever_R;
+
+	PhysBody* CircleLever_L;
+	PhysBody* CircleLever_R;
 
 	uint bonus_fx;
+	uint lever_fx;
+
 	p2Point<int> ray;
+
+	bool fx_lever_left = false;
+	bool fx_lever_right = false;
 	bool ray_on;
 };
