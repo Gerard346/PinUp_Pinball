@@ -10,13 +10,10 @@
 #include "math.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
-{
-
-}
+{}
 
 ModulePlayer::~ModulePlayer()
 {}
-
 
 // Load assets
 bool ModulePlayer::Start()

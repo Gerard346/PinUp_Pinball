@@ -35,18 +35,18 @@ bool ModuleSceneIntro::Start()
 	Lever_R = App->textures->Load("pinball/RightFlipper.png");
 
 	CircleLever_L = App->physics->CreateCircle(167, 837, 7, 0);
-	BodyLever_L = App->physics->CreateRectangle(192, 837, 50, 12, 1, Lever_L);
+	BodyLever_L = App->physics->CreateRectangle(192, 837, 45, 12, 1, Lever_L);
 	PivotLever_L = App->physics->CreateCircle(192, 837, 6, 1);
 
 	App->physics->CreateRevolutionJoint(BodyLever_L, CircleLever_L, -0.5, 0, 0, 0, 0, 25, -20);
-	App->physics->CreateRevolutionJoint(BodyLever_L, PivotLever_L, 0.5, 0, 0, 0, 0, 25, -20);
+	App->physics->CreateRevolutionJoint(BodyLever_L, PivotLever_L, 0.35, 0, 0, 0, 0, 25, -20);
 
 	CircleLever_R = App->physics->CreateCircle(286, 837, 7, 0);
-	BodyLever_R = App->physics->CreateRectangle(261, 837, 50, 12, 1, Lever_R);
+	BodyLever_R = App->physics->CreateRectangle(261, 837, 45, 12, 1, Lever_R);
 	PivotLever_R = App->physics->CreateCircle(261, 837, 6, 1);
 
 	App->physics->CreateRevolutionJoint(BodyLever_R, CircleLever_R, 0.5, 0, 0, 0, 0, 21, -20);
-	App->physics->CreateRevolutionJoint(BodyLever_R, PivotLever_R, -0.5, 0, 0, 0, 0, 21, -20);
+	App->physics->CreateRevolutionJoint(BodyLever_R, PivotLever_R, -0.35, 0, 0, 0, 0, 21, -20);
 
 	CreateMap();
 
@@ -114,10 +114,10 @@ update_status ModuleSceneIntro::Update()
 
 	int x, y;
 	BodyLever_L->GetPosition(x, y);
-	App->renderer->Blit(Lever_L, x - 5, y - 10, NULL, 1.0f, BodyLever_L->GetRotation());
+	App->renderer->Blit(Lever_L, x - 7, y - 14, NULL, 1.0f, BodyLever_L->GetRotation()-6);
 
 	BodyLever_R->GetPosition(x, y);
-	App->renderer->Blit(Lever_R, x + 3, y - 10, NULL, 1.0f, BodyLever_R->GetRotation());
+	App->renderer->Blit(Lever_R, x + 3, y - 12, NULL, 1.0f, BodyLever_R->GetRotation()+6);
 
 	PivotLever_L->body->ApplyForceToCenter(b2Vec2(0, 10), true);
 	PivotLever_R->body->ApplyForceToCenter(b2Vec2(0, 10), true);
