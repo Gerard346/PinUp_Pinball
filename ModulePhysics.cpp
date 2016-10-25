@@ -74,6 +74,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, col
 	fixture.shape = &shape;
 	fixture.filter.categoryBits = coll;
 	fixture.density = 1.0f;
+	fixture.filter.maskBits = MAP;
 
 	b->CreateFixture(&fixture);
 

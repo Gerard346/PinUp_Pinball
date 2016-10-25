@@ -169,9 +169,14 @@ update_status ModuleSceneIntro::Update()
 		circles.getLast()->data->listener = this;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && spawned == false)
 	{
+		circles.add(App->physics->CreateCircle(465, 883, 9, true, BALL));
+		spawned = true;
+	}
 
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+	{
 		circles.getFirst()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
 	}
 
@@ -539,13 +544,11 @@ bool ModuleSceneIntro::CreateMap()
 	map.add(App->physics->CreateChain(0, 0, smalltub, 64, false, 0, SMALLTUB));
 	map.add(App->physics->CreateChain(0, 0, upperleft, 50, false, 0, MAP));
 
-	//circles.add(App->physics->CreateCircle(465, 883, 9, true, BALL));
-
 	//sensors
 	App->physics->CreateRectangleSensor(439, 202, 20, 20, BIGTUB_SENSOR);
 	App->physics->CreateRectangleSensor(65,  622, 20, 10, BIGTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(179, 246, 20, 40, SMALLTUB_SENSOR);
 	App->physics->CreateRectangleSensor(403, 650, 20, 10, SMALLTUB_SENSOR_END);
-	App->physics->CreateRectangleSensor(465, 760, 20, 60, LAUNCHER_SENSOR);
+
 	return true;
 }

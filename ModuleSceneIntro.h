@@ -59,4 +59,5 @@ public:
 	bool fx_lever_left = false;
 	bool fx_lever_right = false;
 	bool ray_on;
+	bool spawned = false;
 };
