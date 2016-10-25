@@ -53,14 +53,6 @@ public:
 
 	uint bonus_fx;
 	uint lever_fx;
-	uint intro_fx;
-	uint bonus_fx;
-	uint throw_fx;
-	uint lever_fx;
-	uint triangles_fx;
-	uint ding_fx;
-	uint bulb_fx;
-	uint dead_fx;
 
 	p2Point<int> ray;
 
