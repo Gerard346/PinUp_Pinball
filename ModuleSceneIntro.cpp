@@ -39,23 +39,22 @@ bool ModuleSceneIntro::Start()
 	light = App->textures->Load("pinball/Light_Bulb.png");
 	title = App->textures->Load("pinball/Title_Sprites.png");
 
-
 	light_bulb = { 0,0,18,17 };
 
 	//App->physics->CreatePrismaticJoint(0,0, 0, 0, 0, 0, 0, 0, 0);
 	//App->physics->CreatePrismaticJoint(0, 0, 0, 0, 0, 0, 0, , 0);	
 	//dead_sensor = App->physics->CreateRectangleSensor();
 
-	CircleLever_L = App->physics->CreateCircle(167, 837, 7, 0);
+	CircleLever_L = App->physics->CreateCircle(167, 837, 7, 0, NONE);
 	BodyLever_L = App->physics->CreateRectangle(192, 837, 45, 12, 1, Lever_L);
-	PivotLever_L = App->physics->CreateCircle(192, 837, 6, 1);
+	PivotLever_L = App->physics->CreateCircle(192, 837, 6, 1,  NONE);
 
 	App->physics->CreateRevolutionJoint(BodyLever_L, CircleLever_L, -0.5, 0, 0, 0, 0, 25, -20);
 	App->physics->CreateRevolutionJoint(BodyLever_L, PivotLever_L, 0.35, 0, 0, 0, 0, 25, -20);
 
-	CircleLever_R = App->physics->CreateCircle(286, 837, 7, 0);
+	CircleLever_R = App->physics->CreateCircle(286, 837, 7, 0, NONE);
 	BodyLever_R = App->physics->CreateRectangle(261, 837, 45, 12, 1, Lever_R);
-	PivotLever_R = App->physics->CreateCircle(261, 837, 6, 1);
+	PivotLever_R = App->physics->CreateCircle(261, 837, 6, 1, NONE);
 
 	App->physics->CreateRevolutionJoint(BodyLever_R, CircleLever_R, 0.5, 0, 0, 0, 0, 21, -20);
 	App->physics->CreateRevolutionJoint(BodyLever_R, PivotLever_R, -0.35, 0, 0, 0, 0, 21, -20);
@@ -166,12 +165,13 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 9, true));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 9, true, BALL));
 		circles.getLast()->data->listener = this;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
+
 		circles.getFirst()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
 	}
 
@@ -538,13 +538,14 @@ bool ModuleSceneIntro::CreateMap()
 	map.add(App->physics->CreateChain(0, 0, bigtub, 176, false, 0, BIGTUB));
 	map.add(App->physics->CreateChain(0, 0, smalltub, 64, false, 0, SMALLTUB));
 	map.add(App->physics->CreateChain(0, 0, upperleft, 50, false, 0, MAP));
-	
+
+	//circles.add(App->physics->CreateCircle(465, 883, 9, true, BALL));
+
 	//sensors
 	App->physics->CreateRectangleSensor(439, 202, 20, 20, BIGTUB_SENSOR);
 	App->physics->CreateRectangleSensor(65,  622, 20, 10, BIGTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(179, 246, 20, 40, SMALLTUB_SENSOR);
 	App->physics->CreateRectangleSensor(403, 650, 20, 10, SMALLTUB_SENSOR_END);
-
-	circles.add(App->physics->CreateCircle(455, 853, 9, true));
+	App->physics->CreateRectangleSensor(465, 760, 20, 60, LAUNCHER_SENSOR);
 	return true;
 }

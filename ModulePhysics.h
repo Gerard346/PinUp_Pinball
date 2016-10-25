@@ -14,16 +14,17 @@
 
 enum collider
 {
-	BALL = 1,
-	BIGTUB = 2,
-	SMALLTUB = 4,
-	MAP = 8,
-	BIGTUB_SENSOR = 16,
-	BIGTUB_SENSOR_END = 32,
-	SMALLTUB_SENSOR = 64,
-	SMALLTUB_SENSOR_END = 128
+	BALL = 0x0001,
+	BIGTUB = 0x0002,
+	SMALLTUB = 0x0004,
+	MAP = 0x0008,
+	BIGTUB_SENSOR = 0x0010,
+	BIGTUB_SENSOR_END = 0x0020,
+	SMALLTUB_SENSOR = 0x0040,
+	SMALLTUB_SENSOR_END = 0x0080,
+	LAUNCHER_SENSOR = 0x0100,
+	NONE = 0x0200
 };
-
 
 // Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
@@ -56,7 +57,7 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	PhysBody* CreateCircle(int x, int y, int radius, bool typeBody);
+	PhysBody* CreateCircle(int x, int y, int radius, bool typeBody, collider coll);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, bool type, SDL_Texture* text = nullptr);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collider coll);
 	PhysBody* CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest, collider coll);
