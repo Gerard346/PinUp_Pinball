@@ -545,5 +545,6 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(179, 246, 20, 40, SMALLTUB_SENSOR);
 	App->physics->CreateRectangleSensor(403, 650, 20, 10, SMALLTUB_SENSOR_END);
 
+	circles.add(App->physics->CreateCircle(455, 853, 9, true));
 	return true;
 }
