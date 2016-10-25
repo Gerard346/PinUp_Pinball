@@ -25,14 +25,14 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
-	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
-	lever_fx = App->audio->LoadFx("pinball/lever.wav");
+	bonus_fx = App->audio->LoadFx("pinball/Fx/bonus.wav");
+	lever_fx = App->audio->LoadFx("pinball/Fx/lever.wav");
 
-	circle = App->textures->Load("pinball/Ball.png"); 
-	box = App->textures->Load("pinball/crate.png");
-	map_texture = App->textures->Load("pinball/Map_Pinball.png");
-	Lever_L = App->textures->Load("pinball/LeftFlipper.png");
-	Lever_R = App->textures->Load("pinball/RightFlipper.png");
+	circle = App->textures->Load("pinball/Sprites/Ball.png"); 
+	box = App->textures->Load("pinball/Sprites/crate.png");
+	map_texture = App->textures->Load("pinball/Sprites/Map_Pinball.png");
+	Lever_L = App->textures->Load("pinball/Sprites/LeftFlipper.png");
+	Lever_R = App->textures->Load("pinball/Sprites/RightFlipper.png");
 
 	CircleLever_L = App->physics->CreateCircle(167, 837, 7, 0);
 	BodyLever_L = App->physics->CreateRectangle(192, 837, 45, 12, 1, Lever_L);
