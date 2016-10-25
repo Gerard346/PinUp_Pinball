@@ -198,6 +198,24 @@ b2RevoluteJoint* ModulePhysics::CreateRevolutionJoint(PhysBody* bodyA, PhysBody*
 	return rev_joint;
 }
 
+//Piston
+b2PrismaticJoint* ModulePhysics::CreatePrismaticJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle)
+{
+	b2PrismaticJointDef prismaticJointDef;
+	prismaticJointDef.bodyA = bodyA->body;
+	prismaticJointDef.bodyB = bodyB->body;
+	prismaticJointDef.collideConnected = false;
+	prismaticJointDef.localAnchorA.Set(localAnchorA_x, localAnchorA_y);
+	prismaticJointDef.localAnchorB.Set(localAnchorB_x, localAnchorB_y);
+	prismaticJointDef.referenceAngle = reference_angle;
+	prismaticJointDef.enableLimit = true;
+	prismaticJointDef.referenceAngle = 0 * DEGTORAD;
+	prismaticJointDef.referenceAngle = 0 * DEGTORAD;
+
+	b2PrismaticJoint* prism_joint = (b2PrismaticJoint*)world->CreateJoint(&prismaticJointDef);
+	return prism_joint;
+}
+
 // 
 update_status ModulePhysics::PostUpdate()
 {
