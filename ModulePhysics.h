@@ -61,6 +61,7 @@ public:
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collider coll);
 	PhysBody* CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest, collider coll);
 	b2RevoluteJoint* CreateRevolutionJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle);
+	b2PrismaticJoint* CreatePrismaticJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle);
 	void sensor_collision(PhysBody* bodyA, PhysBody* bodyB);
 
 	// b2ContactListener ---

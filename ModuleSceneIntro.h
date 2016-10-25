@@ -31,6 +31,11 @@ public:
 	SDL_Texture* map_texture;
 	SDL_Texture* Lever_L;
 	SDL_Texture* Lever_R;
+	SDL_Texture* title;
+	SDL_Texture* light;
+	SDL_Texture* numbers_others;
+	SDL_Texture* numbers_score;
+	SDL_Rect light_bulb;
 
 	p2List_item<PhysBody*>* flips_start;
 
