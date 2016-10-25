@@ -6,6 +6,7 @@
 #include "ModuleRender.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleTextures.h"
+#include "ModuleWindow.h"
 #include "p2Point.h"
 #include "math.h"
 
@@ -38,6 +39,9 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	sprintf_s(title, "Multiplier: %02d-Lives: %02d-Score: %08d  ", score, lives, multiplier);
+	App->window->SetTitle(title);
+
 	return UPDATE_CONTINUE;
 }
 /*void ModulePlayer::RestartGame() {

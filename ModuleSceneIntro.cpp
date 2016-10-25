@@ -549,6 +549,11 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(65,  622, 20, 10, BIGTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(179, 246, 20, 40, SMALLTUB_SENSOR);
 	App->physics->CreateRectangleSensor(403, 650, 20, 10, SMALLTUB_SENSOR_END);
+	App->physics->CreateRectangleSensor(216, 274, 18, 18, LIGHT1_SENSOR);
+	App->physics->CreateRectangleSensor(244, 274, 18, 18, LIGHT2_SENSOR);
+	App->physics->CreateRectangleSensor(272, 274, 18, 18, LIGHT3_SENSOR);
+	App->physics->CreateRectangleSensor(300, 274, 18, 18, LIGHT4_SENSOR);
+	App->physics->CreateRectangleSensor(226, 910, 79, 10, DEAD_SENSOR);
 
 	return true;
 }

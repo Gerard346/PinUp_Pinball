@@ -23,7 +23,12 @@ enum collider
 	SMALLTUB_SENSOR = 0x0040,
 	SMALLTUB_SENSOR_END = 0x0080,
 	LAUNCHER_SENSOR = 0x0100,
-	NONE = 0x0200
+	LIGHT1_SENSOR = 0X200,
+	LIGHT2_SENSOR = 0X800,
+	LIGHT3_SENSOR = 0X1000,
+	LIGHT4_SENSOR = 0X2000,
+	DEAD_SENSOR = 0X4000,
+	NONE = 0x8000
 };
 
 // Small class to return to other modules to track position and rotation of physics bodies

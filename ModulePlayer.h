@@ -37,7 +37,7 @@ public:
 	Object LeftFlipper;
 	PhysBody* LeftFlipper_wheel;
 	PhysBody* RightFlipper_wheel;*/
-
+	char title[50];
 
 
 };
