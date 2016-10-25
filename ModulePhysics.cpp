@@ -112,7 +112,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bo
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height)
+PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height, collider coll)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -127,6 +127,8 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	fixture.shape = &box;
 	fixture.density = 1.0f;
 	fixture.isSensor = true;
+	fixture.filter.categoryBits = coll;
+	fixture.filter.maskBits = BALL;
 
 	b->CreateFixture(&fixture);
 
@@ -139,7 +141,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool is_dyn)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest)
 {
 	b2BodyDef body;
 	if (is_dyn)
@@ -163,6 +165,7 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool i
 
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
+	fixture.restitution = rest;
 
 	b->CreateFixture(&fixture);
 

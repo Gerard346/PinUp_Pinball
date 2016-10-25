@@ -487,14 +487,14 @@ bool ModuleSceneIntro::CreateMap()
 		33, 169
 	};
 
-	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 120, false));
-	map.add(App->physics->CreateChain(0, 0, down2left, 32, false));
-	map.add(App->physics->CreateChain(0, 0, downleft, 24, false));
-	map.add(App->physics->CreateChain(0, 0, right2left, 32, false));
-	map.add(App->physics->CreateChain(0, 0, rightleft, 26, false));
-	map.add(App->physics->CreateChain(0, 0, bigtub, 176, false));
-	map.add(App->physics->CreateChain(0, 0, smalltub, 64, false));
-	map.add(App->physics->CreateChain(0, 0, upperleft, 50, false));
+	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 120, false, 0));
+	map.add(App->physics->CreateChain(0, 0, down2left, 32, false, 0));
+	map.add(App->physics->CreateChain(0, 0, downleft, 24, false, 0));
+	map.add(App->physics->CreateChain(0, 0, right2left, 32, false, 0));
+	map.add(App->physics->CreateChain(0, 0, rightleft, 26, false, 0));
+	map.add(App->physics->CreateChain(0, 0, bigtub, 176, false, 0));
+	map.add(App->physics->CreateChain(0, 0, smalltub, 64, false, 0));
+	map.add(App->physics->CreateChain(0, 0, upperleft, 50, false, 0));
 
 	return true;
 }
