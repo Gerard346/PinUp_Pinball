@@ -33,6 +33,18 @@ bool ModuleSceneIntro::Start()
 	map_texture = App->textures->Load("pinball/Sprites/Map_Pinball.png");
 	Lever_L = App->textures->Load("pinball/Sprites/LeftFlipper.png");
 	Lever_R = App->textures->Load("pinball/Sprites/RightFlipper.png");
+	
+	numbers_others = App->textures->Load("pinball/Numbers_Others.png");
+	numbers_score = App->textures->Load("pinball/Numbers_Score.png");
+	light = App->textures->Load("pinball/Light_Bulb.png");
+	title = App->textures->Load("pinball/Title_Sprites.png");
+
+
+	light_bulb = { 0,0,18,17 };
+
+	//App->physics->CreatePrismaticJoint(0,0, 0, 0, 0, 0, 0, 0, 0);
+	//App->physics->CreatePrismaticJoint(0, 0, 0, 0, 0, 0, 0, , 0);	
+	//dead_sensor = App->physics->CreateRectangleSensor();
 
 	CircleLever_L = App->physics->CreateCircle(167, 837, 7, 0);
 	BodyLever_L = App->physics->CreateRectangle(192, 837, 45, 12, 1, Lever_L);
@@ -175,6 +187,50 @@ update_status ModuleSceneIntro::Update()
 		if(normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
+/*if (App->player->score > 29999) {
+		App->player->Lives++;
+		)
+
+		if (dead == true)
+		{
+		if (App->player->Lives > 1)
+		{
+		circles.add(App->physics->CreateCircle(455, 853, 9, true));
+		App->player->multiplier=1;
+		App->player->Lives--;
+		}
+
+		else
+		{
+		//App->player->Restart_game();
+
+		}
+		dead = false;
+		}*/
+
+		/*
+		if (light1 == true){
+		App->render->Blit(light, 207, 265, &ready2);
+		}
+		else if (light2 == true){
+		App->renderer->Blit(light, 235, 265, &light_bulb);
+		}
+		else if (light3 == true){
+		App->renderer->Blit(light, 263, 265, &light_bulb);
+		}
+		else if (light4 == true){
+		App->renderer->Blit(light, 291, 265, &light_bulbNULL);
+		}
+
+		if (light1 == true & light2 == true & light3 == true & light4 == true )
+		{
+		light1 == false;
+		light2 == false;
+		light3 == false;
+		light4 == false;
+		App->player->multiplier++;
+		}
+		*/
 
 	return UPDATE_CONTINUE;
 }
