@@ -29,6 +29,10 @@ public:
 
 	SDL_Texture* Lever_R;
 	SDL_Texture* Lever_L;
+	uint score;
+	uint lives;
+	uint lastscore;
+	uint multiplier;
 	/*Object RightFlipper;
 	Object LeftFlipper;
 	PhysBody* LeftFlipper_wheel;
