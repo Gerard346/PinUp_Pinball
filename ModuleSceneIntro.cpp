@@ -25,8 +25,15 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	
+	intro_fx = App->audio->LoadFx("pinball/Fx/intro.wav");
 	bonus_fx = App->audio->LoadFx("pinball/Fx/bonus.wav");
-	lever_fx = App->audio->LoadFx("pinball/Fx/lever.wav");
+	throw_fx = App->audio->LoadFx("pinball/Fx/throw.wav");
+	lever_fx = App->audio->LoadFx("pinball/Fx/leveror.wav");
+	triangles_fx = App->audio->LoadFx("pinball/Fx/triangles.wav");
+	ding_fx = App->audio->LoadFx("pinball/Fx/ding.wav");
+	bulb_fx = App->audio->LoadFx("pinball/Fx/bulb.wav");
+	dead_fx = App->audio->LoadFx("pinball/Fx/dead.wav");
 
 	circle = App->textures->Load("pinball/Sprites/Ball.png"); 
 	box = App->textures->Load("pinball/Sprites/crate.png");
@@ -34,16 +41,15 @@ bool ModuleSceneIntro::Start()
 	Lever_L = App->textures->Load("pinball/Sprites/LeftFlipper.png");
 	Lever_R = App->textures->Load("pinball/Sprites/RightFlipper.png");
 	
-	numbers_others = App->textures->Load("pinball/Numbers_Others.png");
-	numbers_score = App->textures->Load("pinball/Numbers_Score.png");
-	light = App->textures->Load("pinball/Light_Bulb.png");
-	title = App->textures->Load("pinball/Title_Sprites.png");
+	numbers_others = App->textures->Load("pinball/Sprites/Numbers_Others.png");
+	numbers_score = App->textures->Load("pinball/Sprites/Numbers_Score.png");
+	light = App->textures->Load("pinball/Sprites/Light_Bulb.png");
+	title = App->textures->Load("pinball/Sprites/Title_Sprites.png");
 
 	light_bulb = { 0,0,18,17 };
 
 	//App->physics->CreatePrismaticJoint(0,0, 0, 0, 0, 0, 0, 0, 0);
 	//App->physics->CreatePrismaticJoint(0, 0, 0, 0, 0, 0, 0, , 0);	
-	//dead_sensor = App->physics->CreateRectangleSensor();
 
 	CircleLever_L = App->physics->CreateCircle(167, 837, 7, 0, NONE);
 	BodyLever_L = App->physics->CreateRectangle(192, 837, 45, 12, 1, Lever_L);
@@ -198,6 +204,8 @@ update_status ModuleSceneIntro::Update()
 
 		if (dead == true)
 		{
+		App->audio->PlayFx(dead_fx, 0);
+
 		if (App->player->Lives > 1)
 		{
 		circles.add(App->physics->CreateCircle(455, 853, 9, true));
@@ -215,16 +223,20 @@ update_status ModuleSceneIntro::Update()
 
 		/*
 		if (light1 == true){
+		App->audio->PlayFx(bulb_fx, 0);
 		App->render->Blit(light, 207, 265, &ready2);
 		}
 		else if (light2 == true){
+		App->audio->PlayFx(bulb_fx, 0);
 		App->renderer->Blit(light, 235, 265, &light_bulb);
 		}
 		else if (light3 == true){
+		App->audio->PlayFx(bulb_fx, 0);
 		App->renderer->Blit(light, 263, 265, &light_bulb);
 		}
 		else if (light4 == true){
-		App->renderer->Blit(light, 291, 265, &light_bulbNULL);
+		App->audio->PlayFx(bulb_fx, 0);
+		App->renderer->Blit(light, 291, 265, &light_bulb);
 		}
 
 		if (light1 == true & light2 == true & light3 == true & light4 == true )
