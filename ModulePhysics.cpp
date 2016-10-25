@@ -166,6 +166,8 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool i
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.restitution = rest;
+	fixture.filter.categoryBits = coll;
+	fixture.filter.maskBits = BALL;
 
 	b->CreateFixture(&fixture);
 
@@ -408,20 +410,20 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 
 	switch (bodyB->body->GetFixtureList()->GetFilterData().categoryBits)
 	{
-	case SMALLTUB_SENSOR_END:
-		filter.maskBits = MAP;
+	case BIGTUB_SENSOR:
+		filter.maskBits = BIGTUB | BIGTUB_SENSOR_END;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case BIGTUB_SENSOR_END:
-		filter.maskBits = MAP;
-		bodyA->body->GetFixtureList()->SetFilterData(filter);
-		break;
-	case BIGTUB_SENSOR:
-		filter.maskBits = BIGTUB;
+		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case SMALLTUB_SENSOR:
-		filter.maskBits = SMALLTUB;
+		filter.maskBits = SMALLTUB | SMALLTUB_SENSOR_END;
+		bodyA->body->GetFixtureList()->SetFilterData(filter);
+		break;
+	case SMALLTUB_SENSOR_END:
+		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	}

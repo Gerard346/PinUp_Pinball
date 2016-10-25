@@ -1,28 +1,12 @@
-﻿  Application.cpp
-c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(210): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  Generating Code...
-  Compiling...
-  ModuleSceneIntro.cpp
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(42): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(49): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(94): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(169): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(171): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(173): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(176): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(210): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  ModulePlayer.cpp
-c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(210): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  ModulePhysics.cpp
+﻿  ModulePhysics.cpp
 c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(109): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(110): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(158): warning C4018: '<': signed/unsigned mismatch
 c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(168): warning C4244: '=': conversion from 'int' to 'float32', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(190): warning C4244: '=': conversion from 'int' to 'float32', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(378): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(379): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(385): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(192): warning C4244: '=': conversion from 'int' to 'float32', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(380): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(381): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(387): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
 c:\program files (x86)\microsoft visual studio 14.0\vc\include\cmath(131): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  Generating Code...
   SDL Game.vcxproj -> C:\Users\Marc LF\Documents\GitHub\PinUp_Pinball\Debug\2D Physics - class 4.exe
   SDL Game.vcxproj -> C:\Users\Marc LF\Documents\GitHub\PinUp_Pinball\Debug\2D Physics - class 4.pdb (Full PDB)
