@@ -141,7 +141,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest, collider coll)
 {
 	b2BodyDef body;
 	if (is_dyn)
@@ -400,4 +400,29 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 
 	if(physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
+}
+
+void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
+{
+	b2Filter filter = bodyA->body->GetFixtureList()->GetFilterData();
+
+	switch (bodyB->body->GetFixtureList()->GetFilterData().categoryBits)
+	{
+	case SMALLTUB_SENSOR_END:
+		filter.maskBits = MAP;
+		bodyA->body->GetFixtureList()->SetFilterData(filter);
+		break;
+	case BIGTUB_SENSOR_END:
+		filter.maskBits = MAP;
+		bodyA->body->GetFixtureList()->SetFilterData(filter);
+		break;
+	case BIGTUB_SENSOR:
+		filter.maskBits = BIGTUB;
+		bodyA->body->GetFixtureList()->SetFilterData(filter);
+		break;
+	case SMALLTUB_SENSOR:
+		filter.maskBits = SMALLTUB;
+		bodyA->body->GetFixtureList()->SetFilterData(filter);
+		break;
+	}
 }

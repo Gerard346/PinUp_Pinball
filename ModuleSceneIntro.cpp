@@ -181,21 +181,7 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	int x, y;
-
-	//App->audio->PlayFx(bonus_fx);
-	
-	if(bodyA)
-	{
-		bodyA->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}
-
-	if(bodyB)
-	{
-		bodyB->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}
+	App->physics->sensor_collision(bodyA, bodyB);
 }
 
 
@@ -487,14 +473,21 @@ bool ModuleSceneIntro::CreateMap()
 		33, 169
 	};
 
-	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 120, false, 0));
-	map.add(App->physics->CreateChain(0, 0, down2left, 32, false, 0));
-	map.add(App->physics->CreateChain(0, 0, downleft, 24, false, 0));
-	map.add(App->physics->CreateChain(0, 0, right2left, 32, false, 0));
-	map.add(App->physics->CreateChain(0, 0, rightleft, 26, false, 0));
-	map.add(App->physics->CreateChain(0, 0, bigtub, 176, false, 0));
-	map.add(App->physics->CreateChain(0, 0, smalltub, 64, false, 0));
-	map.add(App->physics->CreateChain(0, 0, upperleft, 50, false, 0));
+	//chains
+	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 120, false, 0, MAP));
+	map.add(App->physics->CreateChain(0, 0, down2left, 32, false, 0, MAP));
+	map.add(App->physics->CreateChain(0, 0, downleft, 24, false, 1, MAP));
+	map.add(App->physics->CreateChain(0, 0, right2left, 32, false, 0, MAP));
+	map.add(App->physics->CreateChain(0, 0, rightleft, 26, false, 1, MAP));
+	map.add(App->physics->CreateChain(0, 0, bigtub, 176, false, 0, BIGTUB));
+	map.add(App->physics->CreateChain(0, 0, smalltub, 64, false, 0, SMALLTUB));
+	map.add(App->physics->CreateChain(0, 0, upperleft, 50, false, 0, MAP));
+	
+	//sensors
+	App->physics->CreateRectangleSensor(439, 202, 20, 20, BIGTUB_SENSOR);
+	App->physics->CreateRectangleSensor(65,  622, 20, 10, BIGTUB_SENSOR_END);
+	App->physics->CreateRectangleSensor(179, 246, 20, 40, SMALLTUB_SENSOR);
+	App->physics->CreateRectangleSensor(403, 650, 20, 10, SMALLTUB_SENSOR_END);
 
 	return true;
 }

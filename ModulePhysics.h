@@ -14,9 +14,14 @@
 
 enum collider
 {
-	BALL,
-	BIGTUB,
-	SMALLTUB
+	BALL = 0x0001,
+	BIGTUB = 0x0002,
+	SMALLTUB = 0x0004,
+	MAP = 0x0008,
+	BIGTUB_SENSOR = 0x0010,
+	BIGTUB_SENSOR_END = 0x0020,
+	SMALLTUB_SENSOR = 0x0040,
+	SMALLTUB_SENSOR_END = 0x0080,
 };
 
 
@@ -54,8 +59,9 @@ public:
 	PhysBody* CreateCircle(int x, int y, int radius, bool typeBody);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, bool type, SDL_Texture* text = nullptr);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collider coll);
-	PhysBody* CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest);
+	PhysBody* CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest, collider coll);
 	b2RevoluteJoint* CreateRevolutionJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle);
+	void sensor_collision(PhysBody* bodyA, PhysBody* bodyB);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
