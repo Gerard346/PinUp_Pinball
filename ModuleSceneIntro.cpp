@@ -41,6 +41,7 @@ bool ModuleSceneIntro::Start()
 	Lever_L = App->textures->Load("pinball/Sprites/LeftFlipper.png");
 	Lever_R = App->textures->Load("pinball/Sprites/RightFlipper.png");
 	piston_texture = App->textures->Load("pinball/Sprites/piston.png");
+	map_texture_walls = App->textures->Load("pinball/Sprites/walls.png");
 	
 	numbers_others = App->textures->Load("pinball/Sprites/Numbers_Others.png");
 	numbers_score = App->textures->Load("pinball/Sprites/Numbers_Score.png");
@@ -184,17 +185,20 @@ update_status ModuleSceneIntro::Update()
 		circles.getLast()->data->listener = this;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) && spawned == false)
+	if (App->input->GetKey(SDL_SCANCODE_UP) && spawned == false)
 	{
 		circles.add(App->physics->CreateCircle(465, 800, 9, true, BALL));
 		spawned = true;
 	}
-	
-
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) && spawned == true)
 	{
 		circles.getFirst()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
-		Piston->body->ApplyForceToCenter(b2Vec2(0.1f, 0.01f), true);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) && spawned == true)
+	{
+		
+		Piston->body->ApplyForceToCenter(b2Vec2(0.1f, 0.01f), true); 
 	}
 	else {
 		Piston->body->ApplyForceToCenter(b2Vec2(0.0f, -30.0f), true);
@@ -217,11 +221,11 @@ update_status ModuleSceneIntro::Update()
 		bonus--;
 		)
 
-		if (dead == true)
+	if (dead == true)
 		{
 		App->audio->PlayFx(dead_fx, 0);
 
-		if (App->player->Lives > 1)
+	if (App->player->Lives > 1)
 		{
 		circles.add(App->physics->CreateCircle(455, 853, 9, true));
 		App->player->multiplier=1;
@@ -269,7 +273,9 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
+	int x, y;
 	App->physics->sensor_collision(bodyA, bodyB);
+
 }
 
 
@@ -594,6 +600,31 @@ bool ModuleSceneIntro::CreateMap()
 			95, 272,
 			85, 270
 		};
+		int blue_R[16] = {
+			457, 162,
+			448, 161,
+			441, 168,
+			441, 178,
+			450, 185,
+			461, 181,
+			464, 169,
+			457, 162
+		};
+		int left_triangle{
+			311, 746,
+			312, 753,
+			373, 641,
+			368, 641,
+			311, 746
+		};
+		int right_triangle{
+			78, 639,
+			139, 752,
+			141, 747,
+			84, 640,
+			78, 639
+		};
+};
 	}*/
 	//chains
 	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 120, false, 0, MAP));
@@ -610,10 +641,14 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(65,  622, 20, 10, BIGTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(179, 246, 20, 40, SMALLTUB_SENSOR);
 	App->physics->CreateRectangleSensor(403, 650, 20, 10, SMALLTUB_SENSOR_END);
-	App->physics->CreateRectangleSensor(216, 274, 18, 18, LIGHT_SENSOR);
-	App->physics->CreateRectangleSensor(244, 274, 18, 18, LIGHT_SENSOR);
-	App->physics->CreateRectangleSensor(272, 274, 18, 18, LIGHT_SENSOR);
-	App->physics->CreateRectangleSensor(300, 274, 18, 18, LIGHT_SENSOR);
+	App->physics->CreateRectangleSensor(216, 274, 18, 18, LIGHT1_SENSOR);
+	App->physics->CreateRectangleSensor(244, 274, 18, 18, LIGHT2_SENSOR);
+	App->physics->CreateRectangleSensor(272, 274, 18, 18, LIGHT3_SENSOR);
+	App->physics->CreateRectangleSensor(300, 274, 18, 18, LIGHT4_SENSOR);
+	App->physics->CreateRectangleSensor(57, 540, 18, 18, LIGHT5_SENSOR);
+	App->physics->CreateRectangleSensor(52, 654, 18, 18, LIGHT6_SENSOR);
+	App->physics->CreateRectangleSensor(396, 540, 18, 18, LIGHT7_SENSOR);
+	App->physics->CreateRectangleSensor(396, 654, 18, 18, LIGHT8_SENSOR);
 	App->physics->CreateRectangleSensor(226, 910, 79, 10, DEAD_SENSOR);
 
 

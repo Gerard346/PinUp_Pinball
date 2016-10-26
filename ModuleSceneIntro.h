@@ -6,6 +6,7 @@
 
 class PhysBody;
 
+
 class ModuleSceneIntro : public Module
 {
 public:
@@ -29,6 +30,7 @@ public:
 	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* map_texture;
+	SDL_Texture* map_texture_walls;
 	SDL_Texture* Lever_L;
 	SDL_Texture* Lever_R;
 	SDL_Texture* title;
@@ -55,7 +57,6 @@ public:
 	PhysBody* Piston;
 	PhysBody* Piston2;
 
-
 	uint intro_fx;
 	uint bonus_fx;
 	uint throw_fx;
@@ -71,4 +72,5 @@ public:
 	bool fx_lever_right = false;
 	bool ray_on;
 	bool spawned = false;
+	bool dead = false;
 };

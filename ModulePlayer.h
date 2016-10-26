@@ -7,14 +7,7 @@
 
 struct SDL_Texture;
 
-/*struct Object {
-	SDL_Texture* graphic;
-	PhysBody* body;
-	uint fx;
 
-	Object() : graphic(NULL), body(NULL)
-	{}
-};*/
 class ModulePlayer : public Module
 {
 public:

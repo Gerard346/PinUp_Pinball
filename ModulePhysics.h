@@ -23,12 +23,20 @@ enum collider
 	SMALLTUB_SENSOR = 0x0040,
 	SMALLTUB_SENSOR_END = 0x0080,
 	LAUNCHER_SENSOR = 0x0100,
-	LIGHT_SENSOR = 0X200,
-	PISTON = 0X800,
-	BOUNCER = 0X1000,
-	NONE= 0X2000,
-	DEAD_SENSOR = 0X4000
+	LIGHT1_SENSOR = 0X200,
+	LIGHT2_SENSOR = 0X800,
+	LIGHT3_SENSOR = 0X1000,
+	LIGHT4_SENSOR = 0X2000,
+	LIGHT5_SENSOR = 0X10000,
+	LIGHT6_SENSOR = 0X20000,
+	LIGHT7_SENSOR = 0X40000,
+	LIGHT8_SENSOR = 0X80000,
+	PISTON = 0X100000,
+	BOUNCER = 0X200000,
+	NONE= 0X400000,
+	DEAD_SENSOR = 0X800000
 };
+
 
 // Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
@@ -69,7 +77,7 @@ public:
 	b2RevoluteJoint* CreateRevolutionJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle);
 	void CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb);
 	void sensor_collision(PhysBody* bodyA, PhysBody* bodyB);
-
+	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
@@ -80,5 +88,6 @@ private:
 	b2MouseJoint* mouse_joint;
 	b2Body* ground;
 	b2Fixture* temp = NULL;
+	p2List<PhysBody*> bodies;
 
 };
