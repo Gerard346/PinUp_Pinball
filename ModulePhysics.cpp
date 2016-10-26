@@ -56,7 +56,7 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, collider coll)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, collider coll, int rest)
 {
 	b2BodyDef body;
 	if (is_dyn)
@@ -74,7 +74,12 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, col
 	fixture.shape = &shape;
 	fixture.filter.categoryBits = coll;
 	fixture.density = 1.0f;
+<<<<<<< HEAD
 	fixture.filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON;
+=======
+	fixture.restitution = rest;
+	fixture.filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER;
+>>>>>>> origin/master
 
 	b->CreateFixture(&fixture);
 
