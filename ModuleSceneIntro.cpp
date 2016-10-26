@@ -254,11 +254,7 @@ update_status ModuleSceneIntro::Update()
 		App->player->multiplier++;
 		}
 		*/
-	if (dead == true) {
-		lose_ball->body->GetWorld()->DestroyBody(lose_ball->body);
-		lose_ball = nullptr;
-		App->player->lives--;
-	}
+	
 	return UPDATE_CONTINUE;
 }
 
@@ -266,12 +262,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
 	App->physics->sensor_collision(bodyA, bodyB);
-	if (bodyA != nullptr) {
-		if (bodyB->collider == DEAD_SENSOR) {
-		lose_ball = bodyA;
-		dead = true;
-		}
-	}
+	
 }
 
 

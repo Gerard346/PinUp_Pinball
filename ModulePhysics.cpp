@@ -74,12 +74,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, col
 	fixture.shape = &shape;
 	fixture.filter.categoryBits = coll;
 	fixture.density = 1.0f;
-<<<<<<< HEAD
 	fixture.filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON;
-=======
-	fixture.restitution = rest;
-	fixture.filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER;
->>>>>>> origin/master
 
 	b->CreateFixture(&fixture);
 
@@ -503,7 +498,7 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 		break;
 	case SMALLTUB_SENSOR_END:
 		//LightSensor 8
-		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON;
+		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER| PISTON;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case LIGHT1_SENSOR:
