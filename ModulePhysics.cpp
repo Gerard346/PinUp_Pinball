@@ -531,10 +531,11 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case DEAD_SENSOR:
-		App->player->lives--;
-		filter.maskBits = MAP | LEVER;
+		
+		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON;
 		
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
+		App->player->lives--;
 		
 		break;
 	}

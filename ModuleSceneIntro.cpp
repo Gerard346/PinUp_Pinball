@@ -197,7 +197,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) && spawned == true)
 	{
-		circles.getFirst()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
+	circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
 	}
 	//
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_UP)
@@ -214,24 +214,22 @@ update_status ModuleSceneIntro::Update()
 		}
 		PivotLever_L->body->ApplyForceToCenter(b2Vec2(0, -90), true);
 	}//
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
 	{
 		fx_intro = false;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
-
-		Piston->body->ApplyForceToCenter(b2Vec2(0.1f, 0.01f), true);
 		if (fx_intro == false)
 		{
 			App->audio->PlayFx(intro_fx, 0);
-			fx_lever_right = true;
+			fx_intro = true;
 		}
-
+		Piston->body->ApplyForceToCenter(b2Vec2(0.1f, 0.01f), true);	
 	}
-		else {
+	else {
 			Piston->body->ApplyForceToCenter(b2Vec2(0.0f, -30.0f), true);
-		}
+	}
 	
 	
 
@@ -248,8 +246,6 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
-
-		
 
 	
 
