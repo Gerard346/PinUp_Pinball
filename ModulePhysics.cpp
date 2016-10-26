@@ -74,7 +74,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, col
 	fixture.shape = &shape;
 	fixture.filter.categoryBits = coll;
 	fixture.density = 1.0f;
-	fixture.filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER;
+	fixture.filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON;
 
 	b->CreateFixture(&fixture);
 
@@ -143,6 +143,54 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	b->SetUserData(pbody);
 	pbody->width = width;
 	pbody->height = height;
+	pbody->collider = coll;
+
+	return pbody;
+}
+
+PhysBody * ModulePhysics::CreatePolygon(int x, int y, int* points, int size, float res, bool isdyn, collider coll, bool is_sensor)
+{
+	b2BodyDef body;
+	if (isdyn)
+		body.type = b2_dynamicBody;
+	else
+		body.type = b2_staticBody;
+
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&body);
+
+	b2Vec2* vertices = new b2Vec2[size / 2];
+	for (uint i = 0; i < size / 2; ++i)
+	{
+		vertices[i].Set(PIXEL_TO_METERS(points[i * 2 + 0]), PIXEL_TO_METERS(points[i * 2 + 1]));
+	}
+
+	b2PolygonShape polygonShape;
+	polygonShape.Set(vertices, size / 2);
+
+	b2FixtureDef fixture;
+	fixture.shape = &polygonShape;
+	fixture.density = 1.0f;
+
+	if (is_sensor == true)
+	{
+		fixture.isSensor = true;
+	}
+
+	else
+	{
+		fixture.restitution = res;
+	}
+
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = pbody->height = 0;
+	pbody->collider = coll;
 
 	return pbody;
 }
@@ -437,23 +485,23 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 	switch (bodyB->body->GetFixtureList()->GetFilterData().categoryBits)
 	{
 	case BIGTUB_SENSOR:
-		filter.maskBits = BIGTUB | BIGTUB_SENSOR_END | LEVER;
+		filter.maskBits = BIGTUB | BIGTUB_SENSOR_END | LEVER | PISTON;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case BIGTUB_SENSOR_END:
-		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER;
+		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case SMALLTUB_SENSOR:
-		filter.maskBits = SMALLTUB | SMALLTUB_SENSOR_END | LEVER;
+		filter.maskBits = SMALLTUB | SMALLTUB_SENSOR_END | LEVER | PISTON;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case SMALLTUB_SENSOR_END:
 		//LightSensor 8
-		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER;
+		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
-	/*case LIGHT1_SENSOR:
+	case LIGHT1_SENSOR:
 		filter.maskBits = MAP;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
@@ -468,6 +516,7 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 	case LIGHT4_SENSOR:
 		filter.maskBits = MAP;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
+		App->player->lives--;
 		break;
 	case LIGHT5_SENSOR:
 		filter.maskBits = MAP;
@@ -482,8 +531,11 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case DEAD_SENSOR:
-		filter.maskBits = MAP;
+		App->player->lives--;
+		filter.maskBits = MAP | LEVER;
+		
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
-		break;*/
+		
+		break;
 	}
 }

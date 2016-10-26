@@ -18,6 +18,7 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	bool CreateMap();
+
 	
 public:
 	p2List<PhysBody*> circles;
@@ -26,6 +27,7 @@ public:
 	p2List<PhysBody*> bouncers;
 	PhysBody* sensor;
 	bool sensed;
+
 
 	SDL_Texture* circle;
 	SDL_Texture* box;
@@ -44,6 +46,7 @@ public:
 
 	PhysBody* P_Lever_L;
 	PhysBody* P_Lever_R;
+	PhysBody* dead_sensor;
 
 	PhysBody* PivotLever_L;
 	PhysBody* PivotLever_R;

@@ -6,6 +6,8 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModulePlayer.h"
+
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -70,6 +72,8 @@ bool ModuleSceneIntro::Start()
 	Piston = App->physics->CreateRectangle(465, 860, 10, 10, true, PISTON);
 	Piston2 = App->physics->CreateRectangle(465, 894, 10, 10, false, PISTON);
 	App->physics->CreatePrismaticJoint(Piston, Piston2);
+
+	dead_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 10, SCREEN_WIDTH / 2, 10, DEAD_SENSOR);
 
 	CreateMap();
 
@@ -148,6 +152,7 @@ update_status ModuleSceneIntro::Update()
 
 	PivotLever_L->body->ApplyForceToCenter(b2Vec2(0, 10), true);
 	PivotLever_R->body->ApplyForceToCenter(b2Vec2(0, 10), true);
+	Piston->body->ApplyForceToCenter(b2Vec2(0, 10), true);
 	
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
@@ -216,29 +221,11 @@ update_status ModuleSceneIntro::Update()
 		if(normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
-/*if (App->player->score > 29999 && App->player->bonus == 1) {
-		App->player->Lives++;
-		bonus--;
-		)
 
-	if (dead == true)
-		{
-		App->audio->PlayFx(dead_fx, 0);
 
-	if (App->player->Lives > 1)
-		{
-		circles.add(App->physics->CreateCircle(455, 853, 9, true));
-		App->player->multiplier=1;
-		App->player->Lives--;
-		}
+		
 
-		else
-		{
-		//App->player->Restart_game();
-
-		}
-		dead = false;
-		}*/
+	
 
 		/*
 		if (light1 == true){
@@ -267,7 +254,11 @@ update_status ModuleSceneIntro::Update()
 		App->player->multiplier++;
 		}
 		*/
-
+	if (dead == true) {
+		lose_ball->body->GetWorld()->DestroyBody(lose_ball->body);
+		lose_ball = nullptr;
+		App->player->lives--;
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -275,7 +266,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
 	App->physics->sensor_collision(bodyA, bodyB);
-
+	if (bodyA != nullptr) {
+		if (bodyB->collider == DEAD_SENSOR) {
+		lose_ball = bodyA;
+		dead = true;
+		}
+	}
 }
 
 
@@ -566,66 +562,50 @@ bool ModuleSceneIntro::CreateMap()
 		35, 168,
 		33, 169
 	};
+	int blueL[16] = {
+		111, 233,
+		106, 243,
+		107, 252,
+		117, 257,
+		126, 252,
+		129, 243,
+		123, 235,
+		111, 233
+	};
 
-	/*void ModuleSceneIntro::CreateBouncers() {
-
-		int blue_L[16] = {
-			111, 233,
-			106, 243,
-			107, 252,
-			117, 257,
-			126, 252,
-			129, 243,
-			123, 235,
-			111, 233
-		};
-
-		int red_LU[16] = {
-			69, 225,
-			78, 229,
-			82, 238,
-			76, 248,
-			64, 248,
-			58, 240,
-			60, 230,
-			69, 225
-		};
-		int red_LD[16] = {
-			85, 270,
-			76, 278,
-			78, 287,
-			88, 292,
-			98, 288,
-			100, 280,
-			95, 272,
-			85, 270
-		};
-		int blue_R[16] = {
-			457, 162,
-			448, 161,
-			441, 168,
-			441, 178,
-			450, 185,
-			461, 181,
-			464, 169,
-			457, 162
-		};
-		int left_triangle{
-			311, 746,
-			312, 753,
-			373, 641,
-			368, 641,
-			311, 746
-		};
-		int right_triangle{
-			78, 639,
-			139, 752,
-			141, 747,
-			84, 640,
-			78, 639
-		};
-};
-	}*/
+	int redLU[16] = {
+		69, 225,
+		78, 229,
+		82, 238,
+		76, 248,
+		64, 248,
+		58, 240,
+		60, 230,
+		69, 225
+	};
+	int redLD[16] = {
+		85, 270,
+		76, 278,
+		78, 287,
+		88, 292,
+		98, 288,
+		100, 280,
+		95, 272,
+		85, 270
+	};
+	int blueR[16] = {
+		457, 162,
+		448, 161,
+		441, 168,
+		441, 178,
+		450, 185,
+		461, 181,
+		464, 169,
+		457, 162
+	};
+	
+	
+	
 	//chains
 	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 120, false, 0, MAP));
 	map.add(App->physics->CreateChain(0, 0, down2left, 32, false, 0, MAP));
@@ -650,6 +630,9 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(396, 540, 18, 18, LIGHT7_SENSOR);
 	App->physics->CreateRectangleSensor(226, 910, 79, 10, DEAD_SENSOR);
 
+	//bouncers
+
+	//App->physics->CreatePolygon(0, 0, blue_L, 16, 1.5f, false, L_TRIANGLE, false));
 
 	return true;
 }

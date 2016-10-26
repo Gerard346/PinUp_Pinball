@@ -56,6 +56,7 @@ public:
 	b2Body* body;
 	Module* listener;
 	SDL_Texture* texture = nullptr;
+	collider collider;
 };
 
 // Module --------------------------------------
@@ -74,6 +75,7 @@ public:
 	PhysBody* CreateRectangle(int x, int y, int width, int height, bool type, collider coll, SDL_Texture* text = nullptr);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collider coll);
 	PhysBody* CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest, collider coll);
+	PhysBody* CreatePolygon(int x, int y, int* points, int size, float res, bool isdyn, collider coll, bool is_sensor);
 	b2RevoluteJoint* CreateRevolutionJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle);
 	void CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb);
 	void sensor_collision(PhysBody* bodyA, PhysBody* bodyB);
