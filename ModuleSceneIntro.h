@@ -78,6 +78,13 @@ public:
 	bool ray_on;
 	bool spawned = false;
 	bool dead = false;
-	
+	bool light1 = false;
+	bool light2 = false;
+	bool light3 = false;
+	bool light4 = false;
+	bool l1 = false;
+	bool l2 = false;
+	bool l3 = false;
+	bool l4 = false;
 	bool lost = false;
 };

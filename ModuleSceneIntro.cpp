@@ -247,40 +247,59 @@ update_status ModuleSceneIntro::Update()
 	}
 
 
-	
 
-		/*
-		if (light1 == true){
-		App->audio->PlayFx(bulb_fx, 0);
-		App->render->Blit(light, 207, 265, &ready2);
+
+if (light1 == true){
+	if (l1 == false) {
+			App->audio->PlayFx(bulb_fx, 0);
+			App->player->score += 11 * App->player->multiplier;
+			l1 == true;
 		}
-		else if (light2 == true){
-		App->audio->PlayFx(bulb_fx, 0);
+		App->renderer->Blit(light, 207, 265, &light_bulb);
+		}
+	else if (light2 == true){
+		if (l2 == false) {
+				App->audio->PlayFx(bulb_fx, 0);
+				App->player->score += 11 * App->player->multiplier;
+				l2 == true;
+			}
 		App->renderer->Blit(light, 235, 265, &light_bulb);
 		}
-		else if (light3 == true){
-		App->audio->PlayFx(bulb_fx, 0);
+	else if (light3 == true){
+		if (l3 == false) {
+				App->audio->PlayFx(bulb_fx, 0);
+				App->player->score += 11 * App->player->multiplier;
+				l3 == true;
+			}
 		App->renderer->Blit(light, 263, 265, &light_bulb);
 		}
-		else if (light4 == true){
-		App->audio->PlayFx(bulb_fx, 0);
+	else if (light4 == true){
+		if (l4 == false) {
+				App->audio->PlayFx(bulb_fx, 0);
+				App->player->score += 11 * App->player->multiplier;
+				l4 == true;
+			}
 		App->renderer->Blit(light, 291, 265, &light_bulb);
 		}
 
-		if (light1 == true & light2 == true & light3 == true & light4 == true )
+	if (light1 == true & light2 == true & light3 == true & light4 == true )
 		{
 		light1 == false;
 		light2 == false;
 		light3 == false;
 		light4 == false;
+		l1 == false;
+		l2 == false;
+		l3 == false;
+		l4 == false;
 		App->player->multiplier++;
 		}
-		*/
+		
 	if (dead == true) {
 		if (App->player->lives > 1) {
 			App->player->lives--;
 			App->audio->PlayFx(dead_fx, 0);
-			App->player->multiplier = 0;
+			App->player->multiplier = 1;
 			dead == false;
 		}
 		else {

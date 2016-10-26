@@ -504,18 +504,22 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 		break;
 	case LIGHT1_SENSOR:
 		filter.maskBits = MAP;
+		App->scene_intro->light1 = true;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case LIGHT2_SENSOR:
 		filter.maskBits = MAP;
+		App->scene_intro->light2 = true;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case LIGHT3_SENSOR:
 		filter.maskBits = MAP;
+		App->scene_intro->light3 = true;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case LIGHT4_SENSOR:
 		filter.maskBits = MAP;
+		App->scene_intro->light4 = true;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		App->player->lives--;
 		break;
