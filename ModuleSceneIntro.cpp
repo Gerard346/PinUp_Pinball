@@ -192,22 +192,48 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) && spawned == false)
 	{
-		circles.add(App->physics->CreateCircle(465, 800, 7, true, BALL));
-		spawned = true;
+		circles.add(App->physics->CreateCircle(462, 800, 7, true, BALL));
+		spawned = true;	
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) && spawned == true)
 	{
 		circles.getFirst()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
 	}
-
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) && spawned == true)
+	//
+	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_UP)
 	{
-		
-		Piston->body->ApplyForceToCenter(b2Vec2(0.1f, 0.01f), true); 
+		fx_lever_left = false;
 	}
-	else {
-		Piston->body->ApplyForceToCenter(b2Vec2(0.0f, -30.0f), true);
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	{
+		if (fx_lever_left == false)
+		{
+			App->audio->PlayFx(lever_fx, 0);
+			fx_lever_left = true;
+		}
+		PivotLever_L->body->ApplyForceToCenter(b2Vec2(0, -90), true);
+	}//
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
+	{
+		fx_intro = false;
 	}
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	{
+
+		Piston->body->ApplyForceToCenter(b2Vec2(0.1f, 0.01f), true);
+		if (fx_intro == false)
+		{
+			App->audio->PlayFx(intro_fx, 0);
+			fx_lever_right = true;
+		}
+
+	}
+		else {
+			Piston->body->ApplyForceToCenter(b2Vec2(0.0f, -30.0f), true);
+		}
+	
+	
 
 	// ray -----------------
 	if(ray_on == true)

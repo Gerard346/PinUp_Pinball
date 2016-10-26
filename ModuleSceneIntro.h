@@ -29,6 +29,7 @@ public:
 	bool sensed;
 
 
+
 	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* map_texture;
@@ -73,7 +74,9 @@ public:
 
 	bool fx_lever_left = false;
 	bool fx_lever_right = false;
+	bool fx_intro = false;
 	bool ray_on;
 	bool spawned = false;
 	bool dead = false;
+	bool out = false;
 };
