@@ -56,7 +56,7 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, collider coll, int rest)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, collider coll, int rest0)
 {
 	b2BodyDef body;
 	if (is_dyn)
