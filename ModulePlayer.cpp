@@ -45,13 +45,13 @@ update_status ModulePlayer::Update()
 
 	return UPDATE_CONTINUE;
 }
-/*void ModulePlayer::RestartGame() {
+
+void ModulePlayer::RestartGame() {
 
 if (App->scene_intro->lost == true) {
-lives = 3;
-bonus = 1;
-score = 0;
-multiplier = 1;
+	lives = 3;
+	score = 0;
+	multiplier = 1;
 }
-}*/
+}
 

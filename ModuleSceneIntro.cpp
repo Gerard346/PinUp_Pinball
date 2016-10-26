@@ -276,6 +276,17 @@ update_status ModuleSceneIntro::Update()
 		App->player->multiplier++;
 		}
 		*/
+	if (dead == true) {
+		if (App->player->lives > 1) {
+			App->player->lives--;
+			App->audio->PlayFx(dead_fx, 0);
+			App->player->multiplier = 0;
+			dead == false;
+		}
+		else {
+			lost = true;
+		}
+	}
 	
 	return UPDATE_CONTINUE;
 }

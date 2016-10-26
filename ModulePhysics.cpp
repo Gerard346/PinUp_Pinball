@@ -4,6 +4,7 @@
 #include "ModuleRender.h"
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
+#include "ModuleSceneIntro.h"
 #include "p2Point.h"
 #include "math.h"
 
@@ -533,9 +534,9 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 	case DEAD_SENSOR:
 		
 		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON;
-		
+		App->scene_intro->dead = true;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
-		App->player->lives--;
+		
 		
 		break;
 	}

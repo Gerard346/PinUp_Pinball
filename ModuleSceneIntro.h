@@ -78,5 +78,6 @@ public:
 	bool ray_on;
 	bool spawned = false;
 	bool dead = false;
-	bool out = false;
+	
+	bool lost = false;
 };
