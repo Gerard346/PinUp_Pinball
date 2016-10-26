@@ -14,27 +14,28 @@
 
 enum collider
 {
-	BALL = 0x0001,
-	BIGTUB = 0x0002,
-	SMALLTUB = 0x0004,
-	MAP = 0x0008,
-	BIGTUB_SENSOR = 0x0010,
-	BIGTUB_SENSOR_END = 0x0020,
-	SMALLTUB_SENSOR = 0x0040,
-	SMALLTUB_SENSOR_END = 0x0080,
-	LAUNCHER_SENSOR = 0x0100,
-	LIGHT1_SENSOR = 0X200,
-	LIGHT2_SENSOR = 0X800,
-	LIGHT3_SENSOR = 0X1000,
-	LIGHT4_SENSOR = 0X2000,
-	LIGHT5_SENSOR = 0X10000,
-	LIGHT6_SENSOR = 0X20000,
-	LIGHT7_SENSOR = 0X40000,
-	LIGHT8_SENSOR = 0X80000,
-	PISTON = 0X100000,
-	BOUNCER = 0X200000,
-	NONE= 0X400000,
-	DEAD_SENSOR = 0X800000
+	BALL = 1,
+	BIGTUB = 2,
+	SMALLTUB = 4,
+	MAP = 8,
+	BIGTUB_SENSOR =  16,
+	BIGTUB_SENSOR_END = 32,
+	SMALLTUB_SENSOR = 64,
+	SMALLTUB_SENSOR_END = 128,
+	LAUNCHER_SENSOR = 256,
+	LEVER = 512,
+	PISTON = 1024,
+	LIGHT1_SENSOR = 2048,
+	LIGHT2_SENSOR = 4096,
+	LIGHT3_SENSOR = 8192,
+	LIGHT4_SENSOR = 16384,
+	LIGHT5_SENSOR = 32768,
+	LIGHT6_SENSOR = 65536,
+	LIGHT7_SENSOR = 131072,
+	LIGHT8_SENSOR = 262144,
+	BOUNCER = 524288,
+	DEAD_SENSOR = 1048576,
+	NONE = 2097152
 };
 
 
@@ -70,7 +71,6 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircle(int x, int y, int radius, bool typeBody, collider coll);
-	PhysBody * CreateRectangle(int x, int y, int width, int height, bool is_dyn, SDL_Texture * text, collider coll);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, bool type, collider coll, SDL_Texture* text = nullptr);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collider coll);
 	PhysBody* CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest, collider coll);

@@ -1,12 +1,14 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (2D Physics - class 4.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  ModuleSceneIntro.cpp
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(53): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(60): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(105): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(186): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(188): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(190): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(193): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(210): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
+  ModulePhysics.cpp
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(114): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(115): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(164): warning C4018: '<': signed/unsigned mismatch
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(174): warning C4244: '=': conversion from 'int' to 'float32', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(198): warning C4244: '=': conversion from 'int' to 'float32', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(221): warning C4305: '=': truncation from 'double' to 'float32'
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(406): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(407): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(413): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\cmath(131): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
   SDL Game.vcxproj -> C:\Users\Marc LF\Documents\GitHub\PinUp_Pinball\Debug\Pinball_PinUp.exe
   SDL Game.vcxproj -> C:\Users\Marc LF\Documents\GitHub\PinUp_Pinball\Debug\Pinball_PinUp.pdb (Full PDB)

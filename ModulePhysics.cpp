@@ -74,7 +74,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, col
 	fixture.shape = &shape;
 	fixture.filter.categoryBits = coll;
 	fixture.density = 1.0f;
-	fixture.filter.maskBits = MAP;
+	fixture.filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER;
 
 	b->CreateFixture(&fixture);
 
@@ -103,6 +103,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bo
 	fixture.shape = &box;
 	fixture.density = 1.0f;
 	fixture.restitution = 0.0;
+	fixture.filter.categoryBits = coll;
 	fixture.filter.maskBits = BALL | PISTON;
 	b->CreateFixture(&fixture);
 
@@ -436,22 +437,23 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 	switch (bodyB->body->GetFixtureList()->GetFilterData().categoryBits)
 	{
 	case BIGTUB_SENSOR:
-		filter.maskBits = BIGTUB | BIGTUB_SENSOR_END;
+		filter.maskBits = BIGTUB | BIGTUB_SENSOR_END | LEVER;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case BIGTUB_SENSOR_END:
-		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR;
+		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case SMALLTUB_SENSOR:
-		filter.maskBits = SMALLTUB | SMALLTUB_SENSOR_END;
+		filter.maskBits = SMALLTUB | SMALLTUB_SENSOR_END | LEVER;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case SMALLTUB_SENSOR_END:
-		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR;
+		//LightSensor 8
+		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
-	case LIGHT1_SENSOR:
+	/*case LIGHT1_SENSOR:
 		filter.maskBits = MAP;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
@@ -479,17 +481,9 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 		filter.maskBits = MAP;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
-	case LIGHT8_SENSOR:
-		filter.maskBits = MAP; 
-		bodyA->body->GetFixtureList()->SetFilterData(filter);
-		break;
 	case DEAD_SENSOR:
 		filter.maskBits = MAP;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
-		break;
-	case LAUNCHER_SENSOR:
-		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR;
-		bodyA->body->GetFixtureList()->SetFilterData(filter);
-		break;
+		break;*/
 	}
 }

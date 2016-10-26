@@ -53,27 +53,25 @@ bool ModuleSceneIntro::Start()
 	//App->physics->CreatePrismaticJoint(0,0, 0, 0, 0, 0, 0, 0, 0);
 	//App->physics->CreatePrismaticJoint(0, 0, 0, 0, 0, 0, 0, , 0);	
 
-	CircleLever_L = App->physics->CreateCircle(167, 837, 7, 0, NONE);
-	BodyLever_L = App->physics->CreateRectangle(192, 837, 45, 12, 1, NONE,Lever_L);
-	PivotLever_L = App->physics->CreateCircle(192, 837, 6, 1,  NONE);
+	CircleLever_L = App->physics->CreateCircle(167, 837, 7, 0, LEVER);
+	BodyLever_L = App->physics->CreateRectangle(192, 837, 45, 12, 1, LEVER, Lever_L);
+	PivotLever_L = App->physics->CreateCircle(192, 837, 6, 1,  LEVER);
 
 	App->physics->CreateRevolutionJoint(BodyLever_L, CircleLever_L, -0.5, 0, 0, 0, 0, 25, -20);
 	App->physics->CreateRevolutionJoint(BodyLever_L, PivotLever_L, 0.35, 0, 0, 0, 0, 25, -20);
 
-	CircleLever_R = App->physics->CreateCircle(286, 837, 7, 0, NONE);
-	BodyLever_R = App->physics->CreateRectangle(261, 837, 45, 12, 1, NONE,Lever_R);
-	PivotLever_R = App->physics->CreateCircle(261, 837, 6, 1, NONE);
+	CircleLever_R = App->physics->CreateCircle(286, 837, 7, 0, LEVER);
+	BodyLever_R = App->physics->CreateRectangle(261, 837, 45, 12, 1, LEVER, Lever_R);
+	PivotLever_R = App->physics->CreateCircle(261, 837, 6, 1, LEVER);
 
 	App->physics->CreateRevolutionJoint(BodyLever_R, CircleLever_R, 0.5, 0, 0, 0, 0, 21, -20);
 	App->physics->CreateRevolutionJoint(BodyLever_R, PivotLever_R, -0.35, 0, 0, 0, 0, 21, -20);
 
-	Piston = App->physics->CreateRectangle(465, 860, 10, 10, true,PISTON);
-	Piston2 = App->physics->CreateRectangle(465, 894, 10, 10, false,PISTON);
+	Piston = App->physics->CreateRectangle(465, 860, 10, 10, true, PISTON);
+	Piston2 = App->physics->CreateRectangle(465, 894, 10, 10, false, PISTON);
 	App->physics->CreatePrismaticJoint(Piston, Piston2);
 
-
 	CreateMap();
-
 
 	return ret;
 }
@@ -140,11 +138,13 @@ update_status ModuleSceneIntro::Update()
 	int x, y;
 	BodyLever_L->GetPosition(x, y);
 	App->renderer->Blit(Lever_L, x - 9, y - 12, NULL, 1.0f, BodyLever_L->GetRotation()-6);
-
-	Piston->GetPosition(x, y);
-	App->renderer->Blit(piston_texture, x+2, y, NULL, 1.0f);
 	BodyLever_R->GetPosition(x, y);
-	App->renderer->Blit(Lever_R, x - 1, y - 12, NULL, 1.0f, BodyLever_R->GetRotation()+6);
+	App->renderer->Blit(Lever_R, x - 1, y - 12, NULL, 1.0f, BodyLever_R->GetRotation() + 6);
+
+	int x1, y1;
+	Piston->GetPosition(x1, y1);
+	App->renderer->Blit(piston_texture, x1+2, y1, NULL, 1.0f);
+	
 
 	PivotLever_L->body->ApplyForceToCenter(b2Vec2(0, 10), true);
 	PivotLever_R->body->ApplyForceToCenter(b2Vec2(0, 10), true);
@@ -181,13 +181,13 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 9, true, BALL));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 7, true, BALL));
 		circles.getLast()->data->listener = this;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) && spawned == false)
 	{
-		circles.add(App->physics->CreateCircle(465, 800, 9, true, BALL));
+		circles.add(App->physics->CreateCircle(465, 800, 7, true, BALL));
 		spawned = true;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) && spawned == true)
@@ -640,7 +640,7 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(439, 202, 20, 20, BIGTUB_SENSOR);
 	App->physics->CreateRectangleSensor(65,  622, 20, 10, BIGTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(179, 246, 20, 40, SMALLTUB_SENSOR);
-	App->physics->CreateRectangleSensor(403, 650, 20, 10, SMALLTUB_SENSOR_END);
+	App->physics->CreateRectangleSensor(400, 650, 10, 10, SMALLTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(216, 274, 18, 18, LIGHT1_SENSOR);
 	App->physics->CreateRectangleSensor(244, 274, 18, 18, LIGHT2_SENSOR);
 	App->physics->CreateRectangleSensor(272, 274, 18, 18, LIGHT3_SENSOR);
@@ -648,7 +648,6 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(57, 540, 18, 18, LIGHT5_SENSOR);
 	App->physics->CreateRectangleSensor(52, 654, 18, 18, LIGHT6_SENSOR);
 	App->physics->CreateRectangleSensor(396, 540, 18, 18, LIGHT7_SENSOR);
-	App->physics->CreateRectangleSensor(396, 654, 18, 18, LIGHT8_SENSOR);
 	App->physics->CreateRectangleSensor(226, 910, 79, 10, DEAD_SENSOR);
 
 
