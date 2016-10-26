@@ -15,6 +15,7 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	lives = 3;
 	score = 0;
 	multiplier = 1;
+	bonus = 1;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -48,7 +49,7 @@ update_status ModulePlayer::Update()
 
 if (App->scene_intro->lost == true) {
 lives = 3;
-
+bonus = 1;
 score = 0;
 multiplier = 1;
 }

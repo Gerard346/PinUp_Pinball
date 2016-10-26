@@ -33,6 +33,7 @@ public:
 	uint lives;
 	uint lastscore;
 	uint multiplier;
+	uint bonus;
 	/*Object RightFlipper;
 	Object LeftFlipper;
 	PhysBody* LeftFlipper_wheel;

@@ -86,7 +86,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, col
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bool is_dyn, SDL_Texture* text)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bool is_dyn, collider coll, SDL_Texture* text)
 {
 	b2BodyDef body;
 	if (is_dyn)
@@ -102,17 +102,20 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bo
 	b2FixtureDef fixture;
 	fixture.shape = &box;
 	fixture.density = 1.0f;
-
+	fixture.restitution = 0.0;
+	fixture.filter.maskBits = BALL | PISTON;
 	b->CreateFixture(&fixture);
 
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
+
 	b->SetUserData(pbody);
 	pbody->width = width * 0.5f;
 	pbody->height = height * 0.5f;
 	pbody->texture = text;
 	return pbody;
 }
+
 
 PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height, collider coll)
 {
@@ -201,21 +204,23 @@ b2RevoluteJoint* ModulePhysics::CreateRevolutionJoint(PhysBody* bodyA, PhysBody*
 }
 
 //Piston
-b2PrismaticJoint* ModulePhysics::CreatePrismaticJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle)
+void ModulePhysics::CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb)
+
 {
 	b2PrismaticJointDef prismaticJointDef;
-	prismaticJointDef.bodyA = bodyA->body;
-	prismaticJointDef.bodyB = bodyB->body;
-	prismaticJointDef.collideConnected = false;
-	prismaticJointDef.localAnchorA.Set(localAnchorA_x, localAnchorA_y);
-	prismaticJointDef.localAnchorB.Set(localAnchorB_x, localAnchorB_y);
-	prismaticJointDef.referenceAngle = reference_angle;
-	prismaticJointDef.enableLimit = true;
-	prismaticJointDef.referenceAngle = 0 * DEGTORAD;
-	prismaticJointDef.referenceAngle = 0 * DEGTORAD;
+	prismaticJointDef.bodyA = bodya->body;
+	prismaticJointDef.bodyB = bodyb->body;
+	prismaticJointDef.collideConnected = true;
 
-	b2PrismaticJoint* prism_joint = (b2PrismaticJoint*)world->CreateJoint(&prismaticJointDef);
-	return prism_joint;
+
+	prismaticJointDef.localAnchorA.Set(0, 0);
+	prismaticJointDef.localAnchorB.Set(0, -1);
+	prismaticJointDef.localAxisA.Set(0, -1);
+	prismaticJointDef.enableLimit = true;
+	prismaticJointDef.lowerTranslation = -0.02;
+	prismaticJointDef.upperTranslation = 1.0;
+	(b2PrismaticJoint*)world->CreateJoint(&prismaticJointDef);
+
 }
 
 // 
@@ -446,19 +451,7 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
-	case LIGHT1_SENSOR:
-		filter.maskBits = MAP;
-		bodyA->body->GetFixtureList()->SetFilterData(filter);
-		break;
-	case LIGHT2_SENSOR:
-		filter.maskBits = MAP;
-		bodyA->body->GetFixtureList()->SetFilterData(filter);
-		break;
-	case LIGHT3_SENSOR:
-		filter.maskBits = MAP;
-		bodyA->body->GetFixtureList()->SetFilterData(filter);
-		break;
-	case LIGHT4_SENSOR:
+	case LIGHT_SENSOR:
 		filter.maskBits = MAP;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;

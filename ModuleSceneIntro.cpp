@@ -40,6 +40,7 @@ bool ModuleSceneIntro::Start()
 	map_texture = App->textures->Load("pinball/Sprites/Map_Pinball.png");
 	Lever_L = App->textures->Load("pinball/Sprites/LeftFlipper.png");
 	Lever_R = App->textures->Load("pinball/Sprites/RightFlipper.png");
+	piston_texture = App->textures->Load("pinball/Sprites/piston.png");
 	
 	numbers_others = App->textures->Load("pinball/Sprites/Numbers_Others.png");
 	numbers_score = App->textures->Load("pinball/Sprites/Numbers_Score.png");
@@ -52,20 +53,26 @@ bool ModuleSceneIntro::Start()
 	//App->physics->CreatePrismaticJoint(0, 0, 0, 0, 0, 0, 0, , 0);	
 
 	CircleLever_L = App->physics->CreateCircle(167, 837, 7, 0, NONE);
-	BodyLever_L = App->physics->CreateRectangle(192, 837, 45, 12, 1, Lever_L);
+	BodyLever_L = App->physics->CreateRectangle(192, 837, 45, 12, 1, NONE,Lever_L);
 	PivotLever_L = App->physics->CreateCircle(192, 837, 6, 1,  NONE);
 
 	App->physics->CreateRevolutionJoint(BodyLever_L, CircleLever_L, -0.5, 0, 0, 0, 0, 25, -20);
 	App->physics->CreateRevolutionJoint(BodyLever_L, PivotLever_L, 0.35, 0, 0, 0, 0, 25, -20);
 
 	CircleLever_R = App->physics->CreateCircle(286, 837, 7, 0, NONE);
-	BodyLever_R = App->physics->CreateRectangle(261, 837, 45, 12, 1, Lever_R);
+	BodyLever_R = App->physics->CreateRectangle(261, 837, 45, 12, 1, NONE,Lever_R);
 	PivotLever_R = App->physics->CreateCircle(261, 837, 6, 1, NONE);
 
 	App->physics->CreateRevolutionJoint(BodyLever_R, CircleLever_R, 0.5, 0, 0, 0, 0, 21, -20);
 	App->physics->CreateRevolutionJoint(BodyLever_R, PivotLever_R, -0.35, 0, 0, 0, 0, 21, -20);
 
+	Piston = App->physics->CreateRectangle(465, 860, 10, 10, true,PISTON);
+	Piston2 = App->physics->CreateRectangle(465, 894, 10, 10, false,PISTON);
+	App->physics->CreatePrismaticJoint(Piston, Piston2);
+
+
 	CreateMap();
+
 
 	return ret;
 }
@@ -133,6 +140,8 @@ update_status ModuleSceneIntro::Update()
 	BodyLever_L->GetPosition(x, y);
 	App->renderer->Blit(Lever_L, x - 9, y - 12, NULL, 1.0f, BodyLever_L->GetRotation()-6);
 
+	Piston->GetPosition(x, y);
+	App->renderer->Blit(piston_texture, x+2, y, NULL, 1.0f);
 	BodyLever_R->GetPosition(x, y);
 	App->renderer->Blit(Lever_R, x - 1, y - 12, NULL, 1.0f, BodyLever_R->GetRotation()+6);
 
@@ -175,15 +184,20 @@ update_status ModuleSceneIntro::Update()
 		circles.getLast()->data->listener = this;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && spawned == false)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) && spawned == false)
 	{
-		circles.add(App->physics->CreateCircle(465, 883, 9, true, BALL));
+		circles.add(App->physics->CreateCircle(465, 800, 9, true, BALL));
 		spawned = true;
 	}
+	
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) && spawned == true)
 	{
 		circles.getFirst()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
+		Piston->body->ApplyForceToCenter(b2Vec2(0.1f, 0.01f), true);
+	}
+	else {
+		Piston->body->ApplyForceToCenter(b2Vec2(0.0f, -30.0f), true);
 	}
 
 	// ray -----------------
@@ -198,8 +212,9 @@ update_status ModuleSceneIntro::Update()
 		if(normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
-/*if (App->player->score > 29999) {
+/*if (App->player->score > 29999 && App->player->bonus == 1) {
 		App->player->Lives++;
+		bonus--;
 		)
 
 		if (dead == true)
@@ -546,6 +561,40 @@ bool ModuleSceneIntro::CreateMap()
 		33, 169
 	};
 
+	/*void ModuleSceneIntro::CreateBouncers() {
+
+		int blue_L[16] = {
+			111, 233,
+			106, 243,
+			107, 252,
+			117, 257,
+			126, 252,
+			129, 243,
+			123, 235,
+			111, 233
+		};
+
+		int red_LU[16] = {
+			69, 225,
+			78, 229,
+			82, 238,
+			76, 248,
+			64, 248,
+			58, 240,
+			60, 230,
+			69, 225
+		};
+		int red_LD[16] = {
+			85, 270,
+			76, 278,
+			78, 287,
+			88, 292,
+			98, 288,
+			100, 280,
+			95, 272,
+			85, 270
+		};
+	}*/
 	//chains
 	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 120, false, 0, MAP));
 	map.add(App->physics->CreateChain(0, 0, down2left, 32, false, 0, MAP));
@@ -561,11 +610,12 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(65,  622, 20, 10, BIGTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(179, 246, 20, 40, SMALLTUB_SENSOR);
 	App->physics->CreateRectangleSensor(403, 650, 20, 10, SMALLTUB_SENSOR_END);
-	App->physics->CreateRectangleSensor(216, 274, 18, 18, LIGHT1_SENSOR);
-	App->physics->CreateRectangleSensor(244, 274, 18, 18, LIGHT2_SENSOR);
-	App->physics->CreateRectangleSensor(272, 274, 18, 18, LIGHT3_SENSOR);
-	App->physics->CreateRectangleSensor(300, 274, 18, 18, LIGHT4_SENSOR);
+	App->physics->CreateRectangleSensor(216, 274, 18, 18, LIGHT_SENSOR);
+	App->physics->CreateRectangleSensor(244, 274, 18, 18, LIGHT_SENSOR);
+	App->physics->CreateRectangleSensor(272, 274, 18, 18, LIGHT_SENSOR);
+	App->physics->CreateRectangleSensor(300, 274, 18, 18, LIGHT_SENSOR);
 	App->physics->CreateRectangleSensor(226, 910, 79, 10, DEAD_SENSOR);
+
 
 	return true;
 }

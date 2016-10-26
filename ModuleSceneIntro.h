@@ -17,12 +17,12 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	bool CreateMap();
-
+	
 public:
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> map;
-
+	p2List<PhysBody*> bouncers;
 	PhysBody* sensor;
 	bool sensed;
 
@@ -35,6 +35,7 @@ public:
 	SDL_Texture* light;
 	SDL_Texture* numbers_others;
 	SDL_Texture* numbers_score;
+	SDL_Texture* piston_texture;
 	SDL_Rect light_bulb;
 
 	p2List_item<PhysBody*>* flips_start;
@@ -50,6 +51,10 @@ public:
 
 	PhysBody* CircleLever_L;
 	PhysBody* CircleLever_R;
+
+	PhysBody* Piston;
+	PhysBody* Piston2;
+
 
 	uint intro_fx;
 	uint bonus_fx;

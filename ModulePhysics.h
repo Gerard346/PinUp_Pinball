@@ -23,12 +23,11 @@ enum collider
 	SMALLTUB_SENSOR = 0x0040,
 	SMALLTUB_SENSOR_END = 0x0080,
 	LAUNCHER_SENSOR = 0x0100,
-	LIGHT1_SENSOR = 0X200,
-	LIGHT2_SENSOR = 0X800,
-	LIGHT3_SENSOR = 0X1000,
-	LIGHT4_SENSOR = 0X2000,
-	DEAD_SENSOR = 0X4000,
-	NONE = 0x8000
+	LIGHT_SENSOR = 0X200,
+	PISTON = 0X800,
+	BOUNCER = 0X1000,
+	NONE= 0X2000,
+	DEAD_SENSOR = 0X4000
 };
 
 // Small class to return to other modules to track position and rotation of physics bodies
@@ -63,11 +62,12 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircle(int x, int y, int radius, bool typeBody, collider coll);
-	PhysBody* CreateRectangle(int x, int y, int width, int height, bool type, SDL_Texture* text = nullptr);
+	PhysBody * CreateRectangle(int x, int y, int width, int height, bool is_dyn, SDL_Texture * text, collider coll);
+	PhysBody* CreateRectangle(int x, int y, int width, int height, bool type, collider coll, SDL_Texture* text = nullptr);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collider coll);
 	PhysBody* CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest, collider coll);
 	b2RevoluteJoint* CreateRevolutionJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle);
-	b2PrismaticJoint* CreatePrismaticJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle);
+	void CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb);
 	void sensor_collision(PhysBody* bodyA, PhysBody* bodyB);
 
 	// b2ContactListener ---
