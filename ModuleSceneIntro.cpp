@@ -69,8 +69,8 @@ bool ModuleSceneIntro::Start()
 	App->physics->CreateRevolutionJoint(BodyLever_R, CircleLever_R, 0.5, 0, 0, 0, 0, 21, -20);
 	App->physics->CreateRevolutionJoint(BodyLever_R, PivotLever_R, -0.35, 0, 0, 0, 0, 21, -20);
 
-	Piston = App->physics->CreateRectangle(465, 860, 10, 10, true, PISTON);
-	Piston2 = App->physics->CreateRectangle(465, 894, 10, 10, false, PISTON);
+	Piston = App->physics->CreateRectangle(465, 860, 15, 10, true, PISTON);
+	Piston2 = App->physics->CreateRectangle(465, 894, 15, 10, false, PISTON);
 	App->physics->CreatePrismaticJoint(Piston, Piston2);
 
 	dead_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 10, SCREEN_WIDTH / 2, 10, DEAD_SENSOR);
@@ -187,17 +187,23 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 8, true, BALL));
-		circles.getLast()->data->listener = this;
+		
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) && spawned == false)
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && spawned == false)
 	{
 		circles.add(App->physics->CreateCircle(462, 800, 7, true, BALL));
+		circles.getLast()->data->listener = this;
 		spawned = true;	
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) && spawned == true)
 	{
 	circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
+	}
+	if (push == true)
+	{
+		circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
+		push = false;
 	}
 	//
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_UP)
@@ -249,72 +255,77 @@ update_status ModuleSceneIntro::Update()
 
 
 
-	if (light1 == true)
-	{
-		if (l1 == false) 
-		{
+	if (light1 == true) {
+		if (l1 == false) {
 			App->audio->PlayFx(bulb_fx, 0);
 			App->player->score += 11 * App->player->multiplier;
-			l1 == true;
+			l1 = true;
 		}
 		App->renderer->Blit(light, 207, 265, &light_bulb);
 	}
-	if (light2 == true)
-	{
-		if (l2 == false) 
-		{
-				App->audio->PlayFx(bulb_fx, 0);
-				App->player->score += 11 * App->player->multiplier;
-				l2 == true;
-			}
+	else if (light2 == true) {
+		if (l2 == false) {
+			App->audio->PlayFx(bulb_fx, 0);
+			App->player->score += 11 * App->player->multiplier;
+			l2 = true;
+		}
 		App->renderer->Blit(light, 235, 265, &light_bulb);
 	}
-	if (light3 == true)
-	{
-		if (l3 == false) 
-		{
-				App->audio->PlayFx(bulb_fx, 0);
-				App->player->score += 11 * App->player->multiplier;
-				l3 == true;
-			}
+	else if (light3 == true) {
+		if (l3 == false) {
+			App->audio->PlayFx(bulb_fx, 0);
+			App->player->score += 11 * App->player->multiplier;
+			l3 = true;
+		}
 		App->renderer->Blit(light, 263, 265, &light_bulb);
 	}
-	if (light4 == true)
-	{
-		if (l4 == false) 
-		{
-				App->audio->PlayFx(bulb_fx, 0);
-				App->player->score += 11 * App->player->multiplier;
-				l4 == true;
+	else if (light4 == true) {
+		if (l4 == false) {
+			App->audio->PlayFx(bulb_fx, 0);
+			App->player->score += 11 * App->player->multiplier;
+			l4 = true;
 		}
 		App->renderer->Blit(light, 291, 265, &light_bulb);
 	}
-	if (light1 == true & light2 == true & light3 == true & light4 == true )
-		{
-		light1 == false;
-		light2 == false;
-		light3 == false;
-		light4 == false;
-		l1 == false;
-		l2 == false;
-		l3 == false;
-		l4 == false;
-		App->player->multiplier++;
-		}
-		
-	if (dead == true) 
+
+	if (light1 == true && light2 == true && light3 == true && light4 == true)
 	{
-		if (App->player->lives > 1) 
-		{
+		light1 = false;
+		light2 = false;
+		light3 = false;
+		light4 = false;
+		l1 = false;
+		l2 = false;
+		l3 = false;
+		l4 = false;
+		App->player->multiplier += 1;
+	}
+	if (spawned == false)
+	{
+		light1 = false;
+		light2 = false;
+		light3 = false;
+		light4 = false;
+		l1 = false;
+		l2 = false;
+		l3 = false;
+		l4 = false;
+
+	}
+	if (dead == true) {
+		if (App->player->lives > 1) {
 			App->player->lives--;
 			App->audio->PlayFx(dead_fx, 0);
 			App->player->multiplier = 1;
-			dead == false;
+			spawned = false;
+			dead = false;
+
 		}
-		else 
-		{
-			lost = true;
+		else {
+			App->player->RestartGame();
 		}
+	
+
 	}
 	
 	return UPDATE_CONTINUE;
@@ -768,6 +779,8 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(52, 654, 18, 18, LIGHT6_SENSOR);
 	App->physics->CreateRectangleSensor(396, 540, 18, 18, LIGHT7_SENSOR);
 	App->physics->CreateRectangleSensor(226, 900, 79, 20, DEAD_SENSOR);
+	App->physics->CreateRectangleSensor(20, 490, 10, 10, PUSH_SENSOR);
+
 
 	//bouncers
 	//App->physics->CreatePolygon(0, 0, blue_L, 16, 1.5f, false, L_TRIANGLE, false));

@@ -514,6 +514,7 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 		App->scene_intro->light4 = true;
 		break;
 	case LIGHT5_SENSOR:
+
 		break;
 	case LIGHT6_SENSOR:
 		break;
@@ -521,6 +522,12 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 		break;
 	case DEAD_SENSOR:
 		App->scene_intro->dead = true;
+		break;
+	case PUSH_SENSOR:
+		App->scene_intro->push = true;
+		bodyA->body->GetFixtureList()->SetFilterData(filter);
+
+
 		break;
 	}
 }

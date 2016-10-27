@@ -87,4 +87,5 @@ public:
 	bool l3 = false;
 	bool l4 = false;
 	bool lost = false;
+	bool push = false;
 };

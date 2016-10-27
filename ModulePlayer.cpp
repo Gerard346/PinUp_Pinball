@@ -15,7 +15,7 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	lives = 3;
 	score = 0;
 	multiplier = 1;
-	bonus = 1;
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -40,7 +40,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	sprintf_s(title, "Multiplier: %02d-Lives: %02d-Score: %08d  ", score, lives, multiplier);
+	sprintf_s(title, "Multiplier: %02d-Lives: %02d-Score: %08d  ", multiplier, lives, score);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
@@ -48,11 +48,11 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::RestartGame() {
 
-if (App->scene_intro->lost == true) 
-{
 	lives = 3;
 	score = 0;
 	multiplier = 1;
+	App->scene_intro->spawned = false;
+	App->scene_intro->dead = false;
 }
-}
+
 
