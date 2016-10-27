@@ -119,7 +119,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bo
 }
 
 
-PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height, collider coll)
+PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height, collider coll, category cat)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -144,12 +144,12 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	b->SetUserData(pbody);
 	pbody->width = width;
 	pbody->height = height;
-	pbody->collider = coll;
+	pbody->category = cat;
 
 	return pbody;
 }
 
-PhysBody * ModulePhysics::CreatePolygon(int x, int y, int* points, int size, float res, bool isdyn, collider coll, bool is_sensor)
+PhysBody * ModulePhysics::CreatePolygon(int x, int y, int* points, int size, float res, bool isdyn, collider coll, bool is_sensor, category cat)
 {
 	b2BodyDef body;
 	if (isdyn)
@@ -190,7 +190,7 @@ PhysBody * ModulePhysics::CreatePolygon(int x, int y, int* points, int size, flo
 	pbody->body = b;
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = 0;
-	pbody->collider = coll;
+	pbody->category= cat;
 
 	return pbody;
 }
@@ -500,34 +500,6 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 		//LightSensor 8
 		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
-		break;
-	case LIGHT1_SENSOR:
-		App->scene_intro->light1 = true;
-		break;
-	case LIGHT2_SENSOR:
-		App->scene_intro->light2 = true;
-		break;
-	case LIGHT3_SENSOR:
-		App->scene_intro->light3 = true;
-		break;
-	case LIGHT4_SENSOR:
-		App->scene_intro->light4 = true;
-		break;
-	case LIGHT5_SENSOR:
-
-		break;
-	case LIGHT6_SENSOR:
-		break;
-	case LIGHT7_SENSOR:
-		break;
-	case DEAD_SENSOR:
-		App->scene_intro->dead = true;
-		break;
-	case PUSH_SENSOR:
-		App->scene_intro->push = true;
-		bodyA->body->GetFixtureList()->SetFilterData(filter);
-
-
 		break;
 	}
 }

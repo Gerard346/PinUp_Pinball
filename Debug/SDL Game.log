@@ -3,24 +3,10 @@
 c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(63): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(70): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(121): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(239): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(241): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(243): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(246): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(258): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(268): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(278): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(288): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(292): warning C4554: '&': check operator precedence for possible error; use parentheses to clarify precedence
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(294): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(295): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(296): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(297): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(298): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(299): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(300): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(301): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(312): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(245): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(247): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(249): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(252): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(210): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
   SDL Game.vcxproj -> C:\Users\Marc LF\Documents\GitHub\PinUp_Pinball\Debug\Pinball_PinUp.exe
   SDL Game.vcxproj -> C:\Users\Marc LF\Documents\GitHub\PinUp_Pinball\Debug\Pinball_PinUp.pdb (Full PDB)

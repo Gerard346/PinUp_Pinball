@@ -12,6 +12,21 @@
 #define METERS_TO_PIXELS(m) ((int) floor(PIXELS_PER_METER * m))
 #define PIXEL_TO_METERS(p)  ((float) METER_PER_PIXEL * p)
 
+enum category
+{
+	CHAIN_SENSOR,
+	LIGHT1_SENSOR,
+	LIGHT2_SENSOR,
+	LIGHT3_SENSOR,
+	LIGHT4_SENSOR,
+	LIGHT5_SENSOR,
+	LIGHT6_SENSOR,
+	LIGHT7_SENSOR,
+	LIGHT8_SENSOR,
+	PUSH_SENSOR,
+	DEAD_SENSOR
+};
+
 enum collider
 {
 	BALL = 1,
@@ -23,18 +38,9 @@ enum collider
 	SMALLTUB_SENSOR = 64,
 	SMALLTUB_SENSOR_END = 128,
 	LEVER = 256,
-	DEAD_SENSOR = 256,
-	PISTON = 256,
-	LIGHT1_SENSOR = 512,
-	LIGHT2_SENSOR = 1024,
-	LIGHT3_SENSOR = 2048,
-	LIGHT4_SENSOR = 4096,
-	LIGHT5_SENSOR = 8192,
-	LIGHT6_SENSOR = 16384,
-	LIGHT7_SENSOR = 32768,
-	LIGHT8_SENSOR = 65536,
-	BOUNCER = 512,
-	PUSH_SENSOR = 131072,
+	PISTON = 512,
+	BOUNCER = 1024,
+	SENSOR = 2048,
 	NONE = 0
 };
 
@@ -56,7 +62,7 @@ public:
 	b2Body* body;
 	Module* listener;
 	SDL_Texture* texture = nullptr;
-	collider collider;
+	category category;
 };
 
 // Module --------------------------------------
@@ -73,9 +79,9 @@ public:
 
 	PhysBody* CreateCircle(int x, int y, int radius, bool typeBody, collider coll, int rest = 0);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, bool type, collider coll, SDL_Texture* text = nullptr);
-	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collider coll);
+	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collider coll, category cat);
 	PhysBody* CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest, collider coll);
-	PhysBody* CreatePolygon(int x, int y, int* points, int size, float res, bool isdyn, collider coll, bool is_sensor);
+	PhysBody* CreatePolygon(int x, int y, int* points, int size, float res, bool isdyn, collider coll, bool is_sensor, category cat);
 	b2RevoluteJoint* CreateRevolutionJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle);
 	void CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb);
 	void sensor_collision(PhysBody* bodyA, PhysBody* bodyB);
