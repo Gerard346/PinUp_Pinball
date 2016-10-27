@@ -266,7 +266,7 @@ update_status ModuleSceneIntro::Update()
 		}
 		App->renderer->Blit(light, 207, 265, &light_bulb);
 	}
-	else if (light2 == true) 
+	 if (light2 == true) 
 	{
 		if (l2 == false) 
 		{
@@ -276,7 +276,7 @@ update_status ModuleSceneIntro::Update()
 		}
 		App->renderer->Blit(light, 235, 265, &light_bulb);
 	}
-	else if (light3 == true) 
+	 if (light3 == true) 
 	{
 		if (l3 == false) 
 		{
@@ -286,7 +286,7 @@ update_status ModuleSceneIntro::Update()
 		}
 		App->renderer->Blit(light, 263, 265, &light_bulb);
 	}
-	else if (light4 == true) 
+	 if (light4 == true) 
 	{
 		if (l4 == false)
 		{
