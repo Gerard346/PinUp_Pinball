@@ -339,11 +339,6 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-
-
-
-
-
 	if (bodyA != nullptr)
 	{
 		if (bodyB->category == CHAIN_SENSOR)
@@ -365,6 +360,19 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyB->category == LIGHT4_SENSOR)
 		{
 			App->scene_intro->light4 = true;
+		}
+		if (bodyB->category == LIGHT5_SENSOR)
+		{
+		}
+		if (bodyB->category == LIGHT6_SENSOR)
+		{
+		}
+		if (bodyB->category == LIGHT7_SENSOR)
+		{
+		}
+		if (bodyB->category == PUSH_SENSOR)
+		{
+			push = true;
 		}
 		if (bodyB->category == DEAD_SENSOR)
 		{
@@ -817,7 +825,6 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(396, 540, 18, 18, SENSOR, LIGHT7_SENSOR);
 	App->physics->CreateRectangleSensor(226, 900, 79, 20, SENSOR, DEAD_SENSOR);
 	App->physics->CreateRectangleSensor(20, 490, 10, 10, SENSOR, PUSH_SENSOR);
-
 
 	//bouncers
 	//App->physics->CreatePolygon(0, 0, blue_L, 16, 1.5f, false, L_TRIANGLE, false));
