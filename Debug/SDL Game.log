@@ -1,18 +1,4 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (2D Physics - class 4.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  ModulePhysics.cpp
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(115): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(116): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(165): warning C4018: '<': signed/unsigned mismatch
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(212): warning C4018: '<': signed/unsigned mismatch
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(222): warning C4244: '=': conversion from 'int' to 'float32', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(246): warning C4244: '=': conversion from 'int' to 'float32', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(269): warning C4305: '=': truncation from 'double' to 'float32'
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(454): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(455): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\marc lf\documents\github\pinup_pinball\modulephysics.cpp(461): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
-c:\program files (x86)\microsoft visual studio 14.0\vc\include\cmath(131): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  Generating Code...
-  Compiling...
   ModuleSceneIntro.cpp
 c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(63): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(70): warning C4305: 'argument': truncation from 'double' to 'float'
@@ -36,10 +22,5 @@ c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(300): warni
 c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(301): warning C4553: '==': operator has no effect; did you intend '='?
 c:\users\marc lf\documents\github\pinup_pinball\modulesceneintro.cpp(312): warning C4553: '==': operator has no effect; did you intend '='?
 c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(210): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  ModulePlayer.cpp
-c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(210): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  Application.cpp
-c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(210): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  Generating Code...
   SDL Game.vcxproj -> C:\Users\Marc LF\Documents\GitHub\PinUp_Pinball\Debug\Pinball_PinUp.exe
   SDL Game.vcxproj -> C:\Users\Marc LF\Documents\GitHub\PinUp_Pinball\Debug\Pinball_PinUp.pdb (Full PDB)

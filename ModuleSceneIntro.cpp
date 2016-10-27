@@ -397,6 +397,19 @@ bool ModuleSceneIntro::CreateMap()
 		455, 240
 	};
 
+	int topwall[20] = {
+		336, 222,
+		327, 238,
+		318, 250,
+		309, 254,
+		282, 257,
+		263, 259,
+		236, 257,
+		211, 253,
+		203, 249,
+		334, 222
+	};
+
 	int down2left[32] = {
 		32, 608,
 		32, 619,
@@ -726,6 +739,7 @@ bool ModuleSceneIntro::CreateMap()
 	
 	//chains
 	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 134, false, 0, MAP));
+	map.add(App->physics->CreateChain(0, 0, topwall, 20, false, 0, MAP));
 	map.add(App->physics->CreateChain(0, 0, down2left, 32, false, 0, MAP));
 	map.add(App->physics->CreateChain(0, 0, downleft, 24, false, 1, MAP));
 	map.add(App->physics->CreateChain(0, 0, right2left, 32, false, 0, MAP));
@@ -740,12 +754,12 @@ bool ModuleSceneIntro::CreateMap()
 	//sensors
 	App->physics->CreateRectangleSensor(430, 212, 50, 10, BIGTUB_SENSOR);
 	App->physics->CreateRectangleSensor(362, 212, 50, 10, BIGTUB_SENSOR);
-	App->physics->CreateRectangleSensor(362, 224, 50, 10, BIGTUB_SENSOR_END);
-	App->physics->CreateRectangleSensor(430, 224, 50, 10, BIGTUB_SENSOR_END);
+	App->physics->CreateRectangleSensor(362, 234, 50, 10, BIGTUB_SENSOR_END);
+	App->physics->CreateRectangleSensor(430, 234, 50, 10, BIGTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(65,  622, 20, 10, BIGTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(179, 246, 50, 10, SMALLTUB_SENSOR);
-	App->physics->CreateRectangleSensor(179, 276, 50, 10, SMALLTUB_SENSOR_END);
-	App->physics->CreateRectangleSensor(400, 650, 10, 10, SMALLTUB_SENSOR_END);
+	App->physics->CreateRectangleSensor(179, 266, 50, 10, SMALLTUB_SENSOR_END);
+	App->physics->CreateRectangleSensor(405, 650, 20, 10, SMALLTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(216, 274, 18, 18, LIGHT1_SENSOR);
 	App->physics->CreateRectangleSensor(244, 274, 18, 18, LIGHT2_SENSOR);
 	App->physics->CreateRectangleSensor(272, 274, 18, 18, LIGHT3_SENSOR);
