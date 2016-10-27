@@ -421,6 +421,16 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			App->scene_intro->dead = true;
 		}
+		if (bodyB->category == LEFT_SENSOR)
+		{
+
+			App->player->score += 11;
+		}
+		if (bodyB->category == RIGHT_SENSOR)
+		{
+
+			App->player->score += 11;
+		}
 	
 	}
 }
@@ -869,6 +879,8 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(396, 540, 18, 18, SENSOR, LIGHT7_SENSOR);
 	App->physics->CreateRectangleSensor(226, 900, 79, 20, SENSOR, DEAD_SENSOR);
 	App->physics->CreateRectangleSensor(20, 490, 10, 10, SENSOR, PUSH_SENSOR);
+	App->physics->CreateRectangleSensor(51, 682, 9, 24, SENSOR, LEFT_SENSOR);
+	App->physics->CreateRectangleSensor(397, 682, 9, 24, SENSOR, RIGHT_SENSOR);
 
 	//bouncers
 	//App->physics->CreatePolygon(0, 0, blue_L, 16, 1.5f, false, L_TRIANGLE, false));
