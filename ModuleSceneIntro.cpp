@@ -186,7 +186,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 7, true, BALL));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 8, true, BALL));
 		circles.getLast()->data->listener = this;
 	}
 
@@ -320,7 +320,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 bool ModuleSceneIntro::CreateMap()
 {
-	int Map_Pinball[120] = {
+	int Map_Pinball[134] = {
 		454, 240,
 		456, 318,
 		449, 349,
@@ -365,8 +365,8 @@ bool ModuleSceneIntro::CreateMap()
 		34, 145,
 		146, 145,
 		145, 220,
-		148, 227,
-		149, 241,
+		149, 232,
+		149, 243,
 		146, 258,
 		143, 267,
 		133, 281,
@@ -380,7 +380,14 @@ bool ModuleSceneIntro::CreateMap()
 		106, 321,
 		111, 321,
 		147, 271,
-		154, 253
+		154, 253,
+		158, 233,
+		151, 220,
+		151, 174,
+		151, 141,
+		400, 141,
+		476, 141,
+		455, 240
 	};
 
 	int down2left[32] = {
@@ -452,130 +459,193 @@ bool ModuleSceneIntro::CreateMap()
 		388, 643
 	};
 
-	int bigtub[176] = {
-		456, 236,
-		471, 160,
-		471, 127,
-		463, 94,
-		442, 24,
-		428, 11,
-		410, 8,
-		38, 21,
-		26, 27,
-		19, 37,
-		16, 49,
-		16, 101,
-		20, 109,
-		25, 116,
-		36, 121,
-		50, 125,
-		90, 129,
-		120, 132,
-		131, 134,
-		136, 142,
-		136, 161,
-		110, 165,
-		99, 169,
-		89, 179,
-		84, 190,
-		84, 594,
-		82, 599,
-		73, 606,
-		52, 620,
-		44, 626,
-		53, 640,
-		87, 622,
-		95, 615,
-		101, 606,
-		103, 193,
-		107, 189,
-		122, 186,
-		205, 170,
-		256, 169,
-		322, 173,
-		331, 177,
-		336, 182,
-		341, 189,
-		342, 200,
-		341, 209,
-		337, 216,
-		334, 229,
-		334, 243,
-		390, 240,
-		389, 209,
-		382, 185,
-		376, 175,
-		368, 166,
-		357, 158,
-		341, 152,
-		315, 148,
-		289, 146,
-		255, 146,
-		234, 146,
-		205, 150,
-		165, 157,
-		160, 157,
-		158, 153,
-		158, 138,
-		156, 132,
-		149, 124,
-		141, 119,
-		115, 114,
-		83, 110,
-		50, 106,
-		41, 105,
-		36, 102,
-		35, 96,
-		35, 50,
-		37, 45,
-		42, 43,
-		150, 40,
-		238, 38,
-		418, 35,
-		422, 38,
-		423, 46,
-		444, 130,
-		445, 136,
-		445, 146,
-		442, 159,
-		422, 189,
-		407, 205,
-		400, 213
+	int bigtub[110] = {
+		454, 246,
+		455, 228,
+		469, 168,
+		471, 154,
+		471, 130,
+		470, 123,
+		445, 29,
+		442, 23,
+		437, 17,
+		429, 12,
+		421, 9,
+		413, 9,
+		40, 21,
+		29, 25,
+		23, 32,
+		19, 39,
+		16, 48,
+		16, 102,
+		21, 112,
+		30, 119,
+		40, 124,
+		126, 133,
+		131, 135,
+		135, 141,
+		135, 160,
+		131, 162,
+		115, 164,
+		100, 168,
+		93, 173,
+		88, 179,
+		85, 188,
+		84, 195,
+		83, 595,
+		81, 599,
+		69, 608,
+		51, 620,
+		49, 618,
+		76, 599,
+		80, 593,
+		81, 190,
+		86, 177,
+		99, 165,
+		132, 159,
+		132, 144,
+		124, 137,
+		32, 126,
+		12, 111,
+		13, 29,
+		29, 15,
+		436, 4,
+		461, 53,
+		478, 121,
+		478, 155,
+		460, 229,
+		458, 247
 	};
 
-	int smalltub[64] = {
-		198, 247,
-		198, 224,
-		203, 216,
-		211, 211,
-		237, 205,
-		257, 204,
-		442, 236,
-		445, 239,
-		445, 280,
-		448, 611,
-		446, 615,
-		396, 645,
-		388, 651,
-		398, 667,
-		412, 657,
-		456, 635,
-		461, 629,
-		465, 622,
-		465, 610,
-		465, 248,
-		464, 239,
-		461, 230,
-		454, 223,
-		444, 218,
-		269, 186,
-		246, 184,
-		224, 185,
-		201, 190,
-		187, 196,
-		173, 207,
-		162, 222,
-		154, 255
+	int bigtub2[72] = {
+		393, 213,
+		398, 213,
+		424, 187,
+		437, 167,
+		442, 157,
+		445, 141,
+		445, 133,
+		421, 38,
+		418, 36,
+		43, 44,
+		39, 45,
+		36, 49,
+		36, 99,
+		38, 103,
+		43, 105,
+		135, 117,
+		143, 120,
+		150, 124,
+		156, 131,
+		159, 140,
+		159, 153,
+		161, 156,
+		164, 157,
+		195, 152,
+		226, 147,
+		250, 145,
+		269, 145,
+		303, 147,
+		328, 149,
+		345, 153,
+		363, 162,
+		376, 175,
+		382, 184,
+		386, 195,
+		389, 209,
+		392, 213
+	};
+
+	int bigtub3[62] = {
+		336, 224,
+		341, 209,
+		342, 202,
+		342, 192,
+		339, 185,
+		332, 177,
+		324, 174,
+		288, 170,
+		235, 170,
+		202, 171,
+		107, 190,
+		103, 193,
+		102, 600,
+		100, 608,
+		96, 615,
+		89, 621,
+		62, 635,
+		61, 637,
+		62, 638,
+		84, 628,
+		93, 622,
+		100, 614,
+		106, 602,
+		106, 195,
+		109, 192,
+		203, 174,
+		321, 176,
+		333, 183,
+		338, 193,
+		332, 216,
+		332, 223
+	};
+
+	int smalltub[60] = {
+		155, 249,
+		158, 232,
+		167, 214,
+		181, 199,
+		203, 188,
+		238, 182,
+		257, 183,
+		442, 216,
+		453, 221,
+		461, 229,
+		465, 239,
+		466, 249,
+		466, 614,
+		464, 624,
+		461, 631,
+		452, 638,
+		413, 657,
+		414, 660,
+		450, 642,
+		461, 634,
+		469, 618,
+		469, 240,
+		461, 223,
+		440, 212,
+		255, 178,
+		210, 181,
+		170, 201,
+		154, 225,
+		150, 252,
+		154, 252
+	};
+
+	int smalltub2[44] = {
+		202, 251,
+		199, 249,
+		199, 224,
+		201, 219,
+		208, 212,
+		235, 206,
+		253, 204,
+		441, 236,
+		444, 239,
+		447, 609,
+		445, 615,
+		435, 623,
+		395, 646,
+		394, 643,
+		437, 619,
+		443, 614,
+		445, 609,
+		442, 240,
+		253, 208,
+		209, 216,
+		202, 224,
+		202, 249
 	};
 
 	int upperleft[50] = {
@@ -650,19 +720,26 @@ bool ModuleSceneIntro::CreateMap()
 	
 	
 	//chains
-	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 120, false, 0, MAP));
+	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 134, false, 0, MAP));
 	map.add(App->physics->CreateChain(0, 0, down2left, 32, false, 0, MAP));
 	map.add(App->physics->CreateChain(0, 0, downleft, 24, false, 1, MAP));
 	map.add(App->physics->CreateChain(0, 0, right2left, 32, false, 0, MAP));
 	map.add(App->physics->CreateChain(0, 0, rightleft, 26, false, 1, MAP));
-	map.add(App->physics->CreateChain(0, 0, bigtub, 176, false, 0, BIGTUB));
-	map.add(App->physics->CreateChain(0, 0, smalltub, 64, false, 0, SMALLTUB));
+	map.add(App->physics->CreateChain(0, 0, bigtub, 110, false, 0, BIGTUB));
+	map.add(App->physics->CreateChain(0, 0, bigtub2, 72, false, 0, BIGTUB));
+	map.add(App->physics->CreateChain(0, 0, bigtub3, 60, false, 0, BIGTUB));
+	map.add(App->physics->CreateChain(0, 0, smalltub, 60, false, 0, SMALLTUB));
+	map.add(App->physics->CreateChain(0, 0, smalltub2, 44, false, 0, SMALLTUB));
 	map.add(App->physics->CreateChain(0, 0, upperleft, 50, false, 0, MAP));
 
 	//sensors
-	App->physics->CreateRectangleSensor(439, 202, 20, 20, BIGTUB_SENSOR);
+	App->physics->CreateRectangleSensor(430, 212, 50, 10, BIGTUB_SENSOR);
+	App->physics->CreateRectangleSensor(362, 212, 50, 10, BIGTUB_SENSOR);
+	App->physics->CreateRectangleSensor(362, 224, 50, 10, BIGTUB_SENSOR_END);
+	App->physics->CreateRectangleSensor(430, 224, 50, 10, BIGTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(65,  622, 20, 10, BIGTUB_SENSOR_END);
-	App->physics->CreateRectangleSensor(179, 246, 20, 40, SMALLTUB_SENSOR);
+	App->physics->CreateRectangleSensor(179, 246, 50, 10, SMALLTUB_SENSOR);
+	App->physics->CreateRectangleSensor(179, 256, 50, 10, SMALLTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(400, 650, 10, 10, SMALLTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(216, 274, 18, 18, LIGHT1_SENSOR);
 	App->physics->CreateRectangleSensor(244, 274, 18, 18, LIGHT2_SENSOR);
