@@ -476,7 +476,17 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 			App->player->score += 11;
 		}
-	
+		if (bodyB->category == BUTTONR_SENSOR)
+		{
+			App->audio->PlayFx(bonus_fx, 0);
+			App->player->score += 50;
+		}
+		if (bodyB->category == BUTTONL_SENSOR)
+		{
+			App->audio->PlayFx(bonus_fx, 0);
+			App->player->score += 50;
+		}
+
 	}
 }
 
@@ -965,6 +975,8 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(400, 682, 9, 24, SENSOR, RIGHT_SENSOR);
 	App->physics->CreateRectangleSensor(49, 186, 9, 24, SENSOR, SU1_SENSOR);
 	App->physics->CreateRectangleSensor(77, 186, 9, 24, SENSOR, SU2_SENSOR);
+	App->physics->CreateRectangleSensor(41, 540, 6, 17, SENSOR, BUTTONR_SENSOR);
+	App->physics->CreateRectangleSensor(411, 540, 6, 17, SENSOR, BUTTONL_SENSOR);
 
 	//bouncers
 	//top left

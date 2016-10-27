@@ -30,7 +30,10 @@ enum category
 	LEFT_SENSOR,
 	RIGHT_SENSOR,
 	SU1_SENSOR,
-	SU2_SENSOR
+	SU2_SENSOR,
+	BUTTONL_SENSOR,
+	BUTTONR_SENSOR
+
 };
 
 enum collider
