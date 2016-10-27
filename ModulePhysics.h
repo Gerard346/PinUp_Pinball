@@ -23,14 +23,14 @@ enum category
 	LIGHT6_SENSOR,
 	LIGHT7_SENSOR,
 	LIGHT8_SENSOR,
-	LIGHT9_SENSOR,
-	LIGHT10_SENSOR,
 	PUSH_SENSOR,
 	DEAD_SENSOR,
 	LEFT_SENSOR,
 	RIGHT_SENSOR,
 	SU1_SENSOR,
 	SU2_SENSOR,
+	SU3_SENSOR,
+	SU4_SENSOR,
 	BUTTONL_SENSOR,
 	BUTTONR_SENSOR
 
@@ -94,7 +94,7 @@ public:
 	b2RevoluteJoint* CreateRevolutionJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle);
 	void CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb);
 	void sensor_collision(PhysBody* bodyA, PhysBody* bodyB);
-	
+
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 

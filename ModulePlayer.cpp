@@ -61,11 +61,12 @@ void ModulePlayer::RestartGame() {
 	App->scene_intro->light6 = false;
 	App->scene_intro->light7 = false;
 	App->scene_intro->light8 = false;
-	App->scene_intro->light9 = false;
-	App->scene_intro->light10 = false;
 
+	App->scene_intro->su1 = false;
+	App->scene_intro->su2 = false;
+	App->scene_intro->su3 = false;
+	App->scene_intro->su4 = false;
 
-	
 	App->scene_intro->l1 = false;
 	App->scene_intro->l2 = false;
 	App->scene_intro->l3 = false;

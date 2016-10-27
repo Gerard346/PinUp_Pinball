@@ -76,7 +76,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, col
 	fixture.filter.categoryBits = coll;
 	fixture.density = 1.0f;
 	fixture.restitution = rest;
-	fixture.filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON | SENSOR;
+	fixture.filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON | SENSOR | BOUNCER | BALL;
 
 	b->CreateFixture(&fixture);
 

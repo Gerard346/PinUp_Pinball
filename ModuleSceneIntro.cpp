@@ -238,11 +238,12 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
+	//lights 
 	if (light1 == true) 
 	{
 		if (l1 == false) 
 		{
-			App->audio->PlayFx(bulb_fx, 0);
+			playbonusfx();
 			App->player->score += 11 * App->player->multiplier;
 			l1 = true;
 		}
@@ -252,7 +253,7 @@ update_status ModuleSceneIntro::Update()
 	{
 		if (l2 == false) 
 		{
-			App->audio->PlayFx(bulb_fx, 0);
+			playbonusfx();
 			App->player->score += 11 * App->player->multiplier;
 			l2 = true;
 		}
@@ -262,7 +263,7 @@ update_status ModuleSceneIntro::Update()
 	{
 		if (l3 == false) 
 		{
-			App->audio->PlayFx(bulb_fx, 0);
+			playbonusfx();
 			App->player->score += 11 * App->player->multiplier;
 			l3 = true;
 		}
@@ -272,7 +273,7 @@ update_status ModuleSceneIntro::Update()
 	{
 		if (l4 == false)
 		{
-			App->audio->PlayFx(bulb_fx, 0);
+			playbonusfx();
 			App->player->score += 11 * App->player->multiplier;
 			l4 = true;
 		}
@@ -282,7 +283,7 @@ update_status ModuleSceneIntro::Update()
 	 {
 		 if (l5 == false)
 		 {
-			 App->audio->PlayFx(bulb_fx, 0);
+			 playbonusfx();
 			 App->player->score += 11 * App->player->multiplier;
 			 l5 = true;
 		 }
@@ -292,7 +293,7 @@ update_status ModuleSceneIntro::Update()
 	 {
 		 if (l6 == false)
 		 {
-			 App->audio->PlayFx(bulb_fx, 0);
+			 playbonusfx();
 			 App->player->score += 11 * App->player->multiplier;
 			 l6 = true;
 		 }
@@ -302,7 +303,7 @@ update_status ModuleSceneIntro::Update()
 	 {
 		 if (l7 == false)
 		 {
-			 App->audio->PlayFx(bulb_fx, 0);
+			 playbonusfx();
 			 App->player->score += 11 * App->player->multiplier;
 			 l7 = true;
 		 }
@@ -312,34 +313,54 @@ update_status ModuleSceneIntro::Update()
 	 {
 		 if (l8 == false)
 		 {
-			 App->audio->PlayFx(bulb_fx, 0);
+			 playbonusfx();
 			 App->player->score += 11 * App->player->multiplier;
 			 l8 = true;
 		 }
 		 App->renderer->Blit(light, 40, 148, &light_bulb);
 	 }
-	 if (light9 == true)
+	 if (su1== true)
 	 {
-		 if (l9 == false)
+		 if (s1 == false)
 		 {
-			 App->audio->PlayFx(bulb_fx, 0);
+			 playbonusfx();
 			 App->player->score += 11 * App->player->multiplier;
-			 l9 = true;
+			 s1 = true;
 		 }
-		 App->renderer->Blit(light, 68, 148, &light_bulb);
+		 App->renderer->Blit(light, 40, 149, &light_bulb);
 	 }
-	 if (light10 == true)
+	 if (su2 == true)
 	 {
-		 if (l10 == false)
+		 if (s2 == false)
 		 {
-			 App->audio->PlayFx(bulb_fx, 0);
+			 playbonusfx();
 			 App->player->score += 11 * App->player->multiplier;
-			 l10= true;
+			 s2 = true;
 		 }
-		 App->renderer->Blit(light, 96, 148, &light_bulb);
+		 App->renderer->Blit(light, 69, 149, &light_bulb);
+	 }	 
+	 if (su3 == true)
+	 {
+		 if (s3 == false)
+		 {
+			 playbonusfx();
+			 App->player->score += 11 * App->player->multiplier;
+			 s3 = true;
+		 }
+		 App->renderer->Blit(light, 97, 149, &light_bulb);
+	 }	 
+	 if (su4 == true)
+	 {
+		 if (s4 == false)
+		 {
+			 playbonusfx();
+			 App->player->score += 11 * App->player->multiplier;
+			 s4 = true;
+		 }
+		 App->renderer->Blit(light, 124, 149, &light_bulb);
 	 }
 
-
+	 //multiplier
 	if (light1 == true && light2 == true && light3 == true && light4 == true)
 	{
 		light1 = false;
@@ -353,7 +374,6 @@ update_status ModuleSceneIntro::Update()
 		App->player->multiplier += 1;
 	}
 	
-	
 	if (dead == true) 
 	{
 		App->audio->PlayFx(dead_fx, 0);
@@ -363,8 +383,6 @@ update_status ModuleSceneIntro::Update()
 			App->player->lives-=1;
 			App->player->multiplier = 1;
 			spawned = false;
-		
-
 		}
 		else
 		{
@@ -415,14 +433,6 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			App->scene_intro->light8 = true;
 		}
-		if (bodyB->category == LIGHT9_SENSOR)
-		{
-			App->scene_intro->light9 = true;
-		}
-		if (bodyB->category == LIGHT10_SENSOR)
-		{
-			App->scene_intro->light10 = true;
-		}
 		if (bodyB->category == PUSH_SENSOR)
 		{
 			push = true;
@@ -441,20 +451,32 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		}
 		if (bodyB->category == SU1_SENSOR)
 		{
+			App->scene_intro->su1 = true;
 			App->player->score += 11;
 		}
 		if (bodyB->category == SU2_SENSOR)
 		{
+			App->scene_intro->su2 = true;
+			App->player->score += 11;
+		}
+		if (bodyB->category == SU3_SENSOR)
+		{
+			App->scene_intro->su3 = true;
+			App->player->score += 11;
+		}
+		if (bodyB->category == SU4_SENSOR)
+		{
+			App->scene_intro->su4 = true;
 			App->player->score += 11;
 		}
 		if (bodyB->category == BUTTONR_SENSOR)
 		{
-			App->audio->PlayFx(bonus_fx, 0);
+			playbonusfx();
 			App->player->score += 50;
 		}
 		if (bodyB->category == BUTTONL_SENSOR)
 		{
-			App->audio->PlayFx(bonus_fx, 0);
+			playbonusfx();
 			App->player->score += 50;
 		}
 
@@ -935,24 +957,27 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(300, 251, 18, 18, SENSOR, LIGHT4_SENSOR);
 	App->physics->CreateRectangleSensor(57, 540, 18, 18, SENSOR, LIGHT5_SENSOR);
 	App->physics->CreateRectangleSensor(52, 654, 18, 18, SENSOR, LIGHT6_SENSOR);
-	App->physics->CreateRectangleSensor(396, 540, 18, 18, SENSOR, LIGHT7_SENSOR);
-	App->physics->CreateRectangleSensor(49, 157, 18, 18, SENSOR, LIGHT8_SENSOR);
-	App->physics->CreateRectangleSensor(78, 157, 18, 18, SENSOR, LIGHT9_SENSOR);
-	App->physics->CreateRectangleSensor(106, 157, 18, 18, SENSOR, LIGHT10_SENSOR);
 	App->physics->CreateRectangleSensor(226, 900, 79, 20, SENSOR, DEAD_SENSOR);
 	App->physics->CreateRectangleSensor(20, 490, 10, 10, SENSOR, PUSH_SENSOR);
 	App->physics->CreateRectangleSensor(51, 682, 9, 24, SENSOR, LEFT_SENSOR);
 	App->physics->CreateRectangleSensor(400, 682, 9, 24, SENSOR, RIGHT_SENSOR);
 	App->physics->CreateRectangleSensor(49, 186, 9, 24, SENSOR, SU1_SENSOR);
 	App->physics->CreateRectangleSensor(77, 186, 9, 24, SENSOR, SU2_SENSOR);
+	App->physics->CreateRectangleSensor(105, 186, 9, 24, SENSOR, SU3_SENSOR);
+	App->physics->CreateRectangleSensor(133, 186, 9, 24, SENSOR, SU4_SENSOR);
 	App->physics->CreateRectangleSensor(41, 540, 6, 17, SENSOR, BUTTONR_SENSOR);
 	App->physics->CreateRectangleSensor(411, 540, 6, 17, SENSOR, BUTTONL_SENSOR);
 
 	//bouncers
 	//top left
-	App->physics->CreateCircle(69, 238, 10, false, BOUNCER, 3);
-	App->physics->CreateCircle(88, 281, 10, false, BOUNCER, 3);
-	App->physics->CreateCircle(116, 244, 10, false, BOUNCER, 3);
+	App->physics->CreateCircle(69, 238, 10, false, BOUNCER, 2.5);
+	App->physics->CreateCircle(88, 281, 10, false, BOUNCER, 2.5);
+	App->physics->CreateCircle(116, 244, 10, false, BOUNCER, 2.5);
 
 	return true;
+}
+
+void ModuleSceneIntro::playbonusfx()
+{
+	App->audio->PlayFx(bonus_fx, 0);
 }

@@ -18,7 +18,7 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	bool CreateMap();
-
+	void playbonusfx();
 	
 public:
 	p2List<PhysBody*> circles;
@@ -27,8 +27,6 @@ public:
 	p2List<PhysBody*> bouncers;
 	PhysBody* sensor;
 	bool sensed;
-
-
 
 	SDL_Texture* circle;
 	SDL_Texture* box;
@@ -81,16 +79,9 @@ public:
 	bool ray_on;
 	bool spawned = false;
 	bool dead = false;
-	bool light1 = false;
-	bool light2 = false;
-	bool light3 = false;
-	bool light4 = false;
-	bool light5 = false;
-	bool light6 = false;
-	bool light7 = false;
-	bool light8 = false;
-	bool light9 = false;
-	bool light10 = false;
+	bool light1, light2, light3, light4, light5, light6, light7, light8 = false;
+	
+	bool su1, su2, su3, su4 = false;
 	
 	bool l1 = false;
 	bool l2 = false;
@@ -103,6 +94,8 @@ public:
 	bool l9 = false;
 	bool l10 = false;
 	
+	bool s1, s2, s3, s4 = false;
+
 	bool lost = false;
 	bool push = false;
 };
