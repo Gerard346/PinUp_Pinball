@@ -371,18 +371,7 @@ update_status ModuleSceneIntro::Update()
 		l4 = false;
 		App->player->multiplier += 1;
 	}
-	if (spawned == false)
-	{
-		light1 = false;
-		light2 = false;
-		light3 = false;
-		light4 = false;
-		l1 = false;
-		l2 = false;
-		l3 = false;
-		l4 = false;
-
-	}
+	
 	
 	if (dead == true) 
 	{
