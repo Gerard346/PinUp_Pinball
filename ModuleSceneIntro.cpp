@@ -892,29 +892,63 @@ bool ModuleSceneIntro::CreateMap()
 		457, 162
 	};
 	
+	int smallwall[14] = {
+		66, 175,
+		64, 173,
+		61, 174,
+		61, 199,
+		64, 200,
+		66, 198,
+		66, 176
+	};
+
+	int smallwall2[14] = {
+		91, 174,
+		89, 175,
+		89, 198,
+		91, 201,
+		93, 198,
+		93, 177,
+		92, 174
+	};
+
+	int smallwall3[14] = {
+		117, 176,
+		118, 174,
+		121, 175,
+		121, 198,
+		119, 200,
+		117, 199,
+		117, 178
+	};
+
+
 	//chains
-	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 134, false, 0, MAP));
-	map.add(App->physics->CreateChain(0, 0, topwall, 20, false, 0, MAP));
-	map.add(App->physics->CreateChain(0, 0, down2left, 32, false, 0, MAP));
+	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 134, false, 0.2, MAP));
+	map.add(App->physics->CreateChain(0, 0, topwall, 20, false, 0.2, MAP));
+	map.add(App->physics->CreateChain(0, 0, down2left, 32, false, 0.2, MAP));
 	map.add(App->physics->CreateChain(0, 0, downleft, 24, false, 1, MAP));
-	map.add(App->physics->CreateChain(0, 0, right2left, 32, false, 0, MAP));
+	map.add(App->physics->CreateChain(0, 0, right2left, 32, false, 0.2, MAP));
 	map.add(App->physics->CreateChain(0, 0, rightleft, 26, false, 1, MAP));
 	map.add(App->physics->CreateChain(0, 0, bigtub, 110, false, 0, BIGTUB));
 	map.add(App->physics->CreateChain(0, 0, bigtub2, 72, false, 0, BIGTUB));
 	map.add(App->physics->CreateChain(0, 0, bigtub3, 60, false, 0, BIGTUB));
 	map.add(App->physics->CreateChain(0, 0, smalltub, 60, false, 0, SMALLTUB));
 	map.add(App->physics->CreateChain(0, 0, smalltub2, 44, false, 0, SMALLTUB));
-	map.add(App->physics->CreateChain(0, 0, upperleft, 50, false, 0, MAP));
+	map.add(App->physics->CreateChain(0, 0, upperleft, 50, false, 0.2, MAP));
+	map.add(App->physics->CreateChain(0, 0, smallwall, 14, false, 0.2, MAP));
+	map.add(App->physics->CreateChain(0, 0, smallwall2, 14, false, 0.2, MAP));
+	map.add(App->physics->CreateChain(0, 0, smallwall3, 14, false, 0.2, MAP));
 
 	//sensors
-	App->physics->CreateRectangleSensor(430, 212, 50, 10, BIGTUB_SENSOR, CHAIN_SENSOR);
-	App->physics->CreateRectangleSensor(362, 212, 50, 10, BIGTUB_SENSOR, CHAIN_SENSOR);
+	App->physics->CreateRectangleSensor(430, 212, 50, 20, BIGTUB_SENSOR, CHAIN_SENSOR);
+	App->physics->CreateRectangleSensor(362, 212, 50, 20, BIGTUB_SENSOR, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(362, 234, 50, 10, BIGTUB_SENSOR_END, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(430, 234, 50, 10, BIGTUB_SENSOR_END, CHAIN_SENSOR);
-	App->physics->CreateRectangleSensor(65,  622, 20, 10, BIGTUB_SENSOR_END, CHAIN_SENSOR);
-	App->physics->CreateRectangleSensor(179, 246, 50, 10, SMALLTUB_SENSOR, CHAIN_SENSOR);
-	App->physics->CreateRectangleSensor(179, 266, 50, 10, SMALLTUB_SENSOR_END, CHAIN_SENSOR);
-	App->physics->CreateRectangleSensor(405, 650, 20, 10, SMALLTUB_SENSOR_END, CHAIN_SENSOR);
+	App->physics->CreateRectangleSensor(65, 622, 20, 10, BIGTUB_SENSOR_END, CHAIN_SENSOR);
+	App->physics->CreateRectangleSensor(179, 246, 50, 30, SMALLTUB_SENSOR, CHAIN_SENSOR);
+	App->physics->CreateRectangleSensor(179, 286, 50, 10, SMALLTUB_SENSOR_END, CHAIN_SENSOR);
+	App->physics->CreateRectangleSensor(395, 650, 20, 10, SMALLTUB_SENSOR_END, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(216, 274, 18, 18, SENSOR, LIGHT1_SENSOR);
 	App->physics->CreateRectangleSensor(244, 274, 18, 18, SENSOR, LIGHT2_SENSOR);
 	App->physics->CreateRectangleSensor(272, 274, 18, 18, SENSOR, LIGHT3_SENSOR);
@@ -933,7 +967,10 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(77, 186, 9, 24, SENSOR, SU2_SENSOR);
 
 	//bouncers
-	//App->physics->CreatePolygon(0, 0, blue_L, 16, 1.5f, false, L_TRIANGLE, false));
+	//top left
+	App->physics->CreateCircle(69, 238, 10, false, BOUNCER, 3);
+	App->physics->CreateCircle(88, 281, 10, false, BOUNCER, 3);
+	App->physics->CreateCircle(116, 244, 10, false, BOUNCER, 3);
 
 	return true;
 }
