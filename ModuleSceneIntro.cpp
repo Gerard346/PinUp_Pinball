@@ -195,6 +195,7 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && spawned == false)
 	{
+
 		App->audio->PlayFx(intro_fx, 0);
 		circles.add(App->physics->CreateCircle(462, 800, 7, true, BALL));
 		circles.getLast()->data->listener = this;
@@ -296,6 +297,36 @@ update_status ModuleSceneIntro::Update()
 		}
 		App->renderer->Blit(light, 291, 265, &light_bulb);
 	}
+	if (light5 == true)
+	 {
+		 if (l5 == false)
+		 {
+			 App->audio->PlayFx(bulb_fx, 0);
+			 App->player->score += 11 * App->player->multiplier;
+			 l5 = true;
+		 }
+		 App->renderer->Blit(light, 47, 531, &light_bulb);
+	 }
+	 if (light6 == true)
+	 {
+		 if (l6 == false)
+		 {
+			 App->audio->PlayFx(bulb_fx, 0);
+			 App->player->score += 11 * App->player->multiplier;
+			 l6 = true;
+		 }
+		 App->renderer->Blit(light, 42, 644, &light_bulb);
+	 }
+	 if (light7 == true)
+	 {
+		 if (l7 == false)
+		 {
+			 App->audio->PlayFx(bulb_fx, 0);
+			 App->player->score += 11 * App->player->multiplier;
+			 l7 = true;
+		 }
+		 App->renderer->Blit(light, 386, 532, &light_bulb);
+	 }
 
 	if (light1 == true && light2 == true && light3 == true && light4 == true)
 	{
@@ -321,16 +352,17 @@ update_status ModuleSceneIntro::Update()
 		l4 = false;
 
 	}
+	
 	if (dead == true) 
 	{
 		App->audio->PlayFx(dead_fx, 0);
 		if (App->player->lives > 1) 
 		{
-			App->player->lives--;
-			
+			dead = false;
+			App->player->lives-=1;
 			App->player->multiplier = 1;
 			spawned = false;
-			dead = false;
+		
 
 		}
 		else
@@ -368,12 +400,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		}
 		if (bodyB->category == LIGHT5_SENSOR)
 		{
+
+			App->scene_intro->light5 = true;
 		}
 		if (bodyB->category == LIGHT6_SENSOR)
 		{
+
+			App->scene_intro->light6 = true;
 		}
 		if (bodyB->category == LIGHT7_SENSOR)
 		{
+
+			App->scene_intro->light7 = true;
 		}
 		if (bodyB->category == PUSH_SENSOR)
 		{
@@ -383,6 +421,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			App->scene_intro->dead = true;
 		}
+	
 	}
 }
 

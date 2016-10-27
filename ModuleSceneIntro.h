@@ -85,10 +85,18 @@ public:
 	bool light2 = false;
 	bool light3 = false;
 	bool light4 = false;
+	bool light5 = false;
+	bool light6 = false;
+	bool light7 = false;
+	bool light8 = false;
 	bool l1 = false;
 	bool l2 = false;
 	bool l3 = false;
 	bool l4 = false;
+	bool l5 = false;
+	bool l6 = false;
+	bool l7 = false;
+	bool l8 = false;
 	bool lost = false;
 	bool push = false;
 };
