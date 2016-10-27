@@ -89,6 +89,9 @@ public:
 	bool light6 = false;
 	bool light7 = false;
 	bool light8 = false;
+	bool light9 = false;
+	bool light10 = false;
+	
 	bool l1 = false;
 	bool l2 = false;
 	bool l3 = false;
@@ -97,6 +100,9 @@ public:
 	bool l6 = false;
 	bool l7 = false;
 	bool l8 = false;
+	bool l9 = false;
+	bool l10 = false;
+	
 	bool lost = false;
 	bool push = false;
 };

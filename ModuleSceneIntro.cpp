@@ -327,6 +327,37 @@ update_status ModuleSceneIntro::Update()
 		 }
 		 App->renderer->Blit(light, 386, 532, &light_bulb);
 	 }
+	 if (light8 == true)
+	 {
+		 if (l8 == false)
+		 {
+			 App->audio->PlayFx(bulb_fx, 0);
+			 App->player->score += 11 * App->player->multiplier;
+			 l8 = true;
+		 }
+		 App->renderer->Blit(light, 40, 148, &light_bulb);
+	 }
+	 if (light9 == true)
+	 {
+		 if (l9 == false)
+		 {
+			 App->audio->PlayFx(bulb_fx, 0);
+			 App->player->score += 11 * App->player->multiplier;
+			 l9 = true;
+		 }
+		 App->renderer->Blit(light, 68, 148, &light_bulb);
+	 }
+	 if (light10 == true)
+	 {
+		 if (l10 == false)
+		 {
+			 App->audio->PlayFx(bulb_fx, 0);
+			 App->player->score += 11 * App->player->multiplier;
+			 l10= true;
+		 }
+		 App->renderer->Blit(light, 96, 148, &light_bulb);
+	 }
+
 
 	if (light1 == true && light2 == true && light3 == true && light4 == true)
 	{
@@ -413,6 +444,21 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 			App->scene_intro->light7 = true;
 		}
+		if (bodyB->category == LIGHT8_SENSOR)
+		{
+
+			App->scene_intro->light8 = true;
+		}
+		if (bodyB->category == LIGHT9_SENSOR)
+		{
+
+			App->scene_intro->light9 = true;
+		}
+		if (bodyB->category == LIGHT10_SENSOR)
+		{
+
+			App->scene_intro->light10 = true;
+		}
 		if (bodyB->category == PUSH_SENSOR)
 		{
 			push = true;
@@ -427,6 +473,16 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			App->player->score += 11;
 		}
 		if (bodyB->category == RIGHT_SENSOR)
+		{
+
+			App->player->score += 11;
+		}
+		if (bodyB->category == SU1_SENSOR)
+		{
+
+			App->player->score += 11;
+		}
+		if (bodyB->category == SU2_SENSOR)
 		{
 
 			App->player->score += 11;
@@ -877,10 +933,15 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(57, 540, 18, 18, SENSOR, LIGHT5_SENSOR);
 	App->physics->CreateRectangleSensor(52, 654, 18, 18, SENSOR, LIGHT6_SENSOR);
 	App->physics->CreateRectangleSensor(396, 540, 18, 18, SENSOR, LIGHT7_SENSOR);
+	App->physics->CreateRectangleSensor(49, 157, 18, 18, SENSOR, LIGHT8_SENSOR);
+	App->physics->CreateRectangleSensor(78, 157, 18, 18, SENSOR, LIGHT9_SENSOR);
+	App->physics->CreateRectangleSensor(106, 157, 18, 18, SENSOR, LIGHT10_SENSOR);
 	App->physics->CreateRectangleSensor(226, 900, 79, 20, SENSOR, DEAD_SENSOR);
 	App->physics->CreateRectangleSensor(20, 490, 10, 10, SENSOR, PUSH_SENSOR);
 	App->physics->CreateRectangleSensor(51, 682, 9, 24, SENSOR, LEFT_SENSOR);
-	App->physics->CreateRectangleSensor(397, 682, 9, 24, SENSOR, RIGHT_SENSOR);
+	App->physics->CreateRectangleSensor(400, 682, 9, 24, SENSOR, RIGHT_SENSOR);
+	App->physics->CreateRectangleSensor(49, 186, 9, 24, SENSOR, SU1_SENSOR);
+	App->physics->CreateRectangleSensor(77, 186, 9, 24, SENSOR, SU2_SENSOR);
 
 	//bouncers
 	//App->physics->CreatePolygon(0, 0, blue_L, 16, 1.5f, false, L_TRIANGLE, false));
