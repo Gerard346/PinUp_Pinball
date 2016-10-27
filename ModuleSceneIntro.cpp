@@ -249,39 +249,46 @@ update_status ModuleSceneIntro::Update()
 
 
 
-if (light1 == true){
-	if (l1 == false) {
+	if (light1 == true)
+	{
+		if (l1 == false) 
+		{
 			App->audio->PlayFx(bulb_fx, 0);
 			App->player->score += 11 * App->player->multiplier;
 			l1 == true;
 		}
 		App->renderer->Blit(light, 207, 265, &light_bulb);
-		}
-	else if (light2 == true){
-		if (l2 == false) {
+	}
+	if (light2 == true)
+	{
+		if (l2 == false) 
+		{
 				App->audio->PlayFx(bulb_fx, 0);
 				App->player->score += 11 * App->player->multiplier;
 				l2 == true;
 			}
 		App->renderer->Blit(light, 235, 265, &light_bulb);
-		}
-	else if (light3 == true){
-		if (l3 == false) {
+	}
+	if (light3 == true)
+	{
+		if (l3 == false) 
+		{
 				App->audio->PlayFx(bulb_fx, 0);
 				App->player->score += 11 * App->player->multiplier;
 				l3 == true;
 			}
 		App->renderer->Blit(light, 263, 265, &light_bulb);
-		}
-	else if (light4 == true){
-		if (l4 == false) {
+	}
+	if (light4 == true)
+	{
+		if (l4 == false) 
+		{
 				App->audio->PlayFx(bulb_fx, 0);
 				App->player->score += 11 * App->player->multiplier;
 				l4 == true;
-			}
-		App->renderer->Blit(light, 291, 265, &light_bulb);
 		}
-
+		App->renderer->Blit(light, 291, 265, &light_bulb);
+	}
 	if (light1 == true & light2 == true & light3 == true & light4 == true )
 		{
 		light1 == false;
@@ -295,14 +302,17 @@ if (light1 == true){
 		App->player->multiplier++;
 		}
 		
-	if (dead == true) {
-		if (App->player->lives > 1) {
+	if (dead == true) 
+	{
+		if (App->player->lives > 1) 
+		{
 			App->player->lives--;
 			App->audio->PlayFx(dead_fx, 0);
 			App->player->multiplier = 1;
 			dead == false;
 		}
-		else {
+		else 
+		{
 			lost = true;
 		}
 	}
@@ -312,11 +322,8 @@ if (light1 == true){
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	int x, y;
 	App->physics->sensor_collision(bodyA, bodyB);
-	
 }
-
 
 bool ModuleSceneIntro::CreateMap()
 {
@@ -717,8 +724,6 @@ bool ModuleSceneIntro::CreateMap()
 		457, 162
 	};
 	
-	
-	
 	//chains
 	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 134, false, 0, MAP));
 	map.add(App->physics->CreateChain(0, 0, down2left, 32, false, 0, MAP));
@@ -739,7 +744,7 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(430, 224, 50, 10, BIGTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(65,  622, 20, 10, BIGTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(179, 246, 50, 10, SMALLTUB_SENSOR);
-	App->physics->CreateRectangleSensor(179, 256, 50, 10, SMALLTUB_SENSOR_END);
+	App->physics->CreateRectangleSensor(179, 276, 50, 10, SMALLTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(400, 650, 10, 10, SMALLTUB_SENSOR_END);
 	App->physics->CreateRectangleSensor(216, 274, 18, 18, LIGHT1_SENSOR);
 	App->physics->CreateRectangleSensor(244, 274, 18, 18, LIGHT2_SENSOR);
@@ -748,10 +753,9 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(57, 540, 18, 18, LIGHT5_SENSOR);
 	App->physics->CreateRectangleSensor(52, 654, 18, 18, LIGHT6_SENSOR);
 	App->physics->CreateRectangleSensor(396, 540, 18, 18, LIGHT7_SENSOR);
-	App->physics->CreateRectangleSensor(226, 910, 79, 10, DEAD_SENSOR);
+	App->physics->CreateRectangleSensor(226, 900, 79, 20, DEAD_SENSOR);
 
 	//bouncers
-
 	//App->physics->CreatePolygon(0, 0, blue_L, 16, 1.5f, false, L_TRIANGLE, false));
 
 	return true;

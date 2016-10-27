@@ -48,7 +48,8 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::RestartGame() {
 
-if (App->scene_intro->lost == true) {
+if (App->scene_intro->lost == true) 
+{
 	lives = 3;
 	score = 0;
 	multiplier = 1;
