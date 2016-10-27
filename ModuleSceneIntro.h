@@ -69,6 +69,9 @@ public:
 	uint ding_fx;
 	uint bulb_fx;
 	uint dead_fx;
+	uint collide_fx;
+	uint main_song_fx;
+
 
 	p2Point<int> ray;
 

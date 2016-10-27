@@ -36,6 +36,9 @@ bool ModuleSceneIntro::Start()
 	ding_fx = App->audio->LoadFx("pinball/Fx/ding.wav");
 	bulb_fx = App->audio->LoadFx("pinball/Fx/bulb.wav");
 	dead_fx = App->audio->LoadFx("pinball/Fx/dead.wav");
+	collide_fx = App->audio->LoadFx("pinball/Fx/collide.wav");
+	main_song_fx = App->audio->LoadFx("pinball/Fx/Main_Song.wav");
+	App->audio->PlayFx(main_song_fx);
 
 	circle = App->textures->Load("pinball/Sprites/Ball.png"); 
 	box = App->textures->Load("pinball/Sprites/crate.png");
@@ -192,6 +195,7 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && spawned == false)
 	{
+		App->audio->PlayFx(intro_fx, 0);
 		circles.add(App->physics->CreateCircle(462, 800, 7, true, BALL));
 		circles.getLast()->data->listener = this;
 		spawned = true;	
@@ -228,7 +232,7 @@ update_status ModuleSceneIntro::Update()
 	{
 		if (fx_intro == false)
 		{
-			App->audio->PlayFx(intro_fx, 0);
+			App->audio->PlayFx(throw_fx, 0);
 			fx_intro = true;
 		}
 		Piston->body->ApplyForceToCenter(b2Vec2(0.1f, 0.01f), true);	
@@ -319,10 +323,11 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (dead == true) 
 	{
+		App->audio->PlayFx(dead_fx, 0);
 		if (App->player->lives > 1) 
 		{
 			App->player->lives--;
-			App->audio->PlayFx(dead_fx, 0);
+			
 			App->player->multiplier = 1;
 			spawned = false;
 			dead = false;
