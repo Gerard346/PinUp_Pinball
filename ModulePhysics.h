@@ -32,8 +32,11 @@ enum category
 	SU3_SENSOR,
 	SU4_SENSOR,
 	BUTTONL_SENSOR,
-	BUTTONR_SENSOR
-
+	BUTTONR_SENSOR,
+	BOUNCE,
+	BALLCAT,
+	FLIPPER,
+	CHAIN
 };
 
 enum collider
@@ -52,7 +55,6 @@ enum collider
 	SENSOR = 2048,
 	NONE = 0
 };
-
 
 // Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
@@ -86,10 +88,10 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	PhysBody* CreateCircle(int x, int y, int radius, bool typeBody, collider coll, int rest = 0);
+	PhysBody* CreateCircle(int x, int y, int radius, bool typeBody, collider coll, int rest, category cat);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, bool type, collider coll, SDL_Texture* text = nullptr);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collider coll, category cat);
-	PhysBody* CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest, collider coll);
+	PhysBody* CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest, collider coll, category cat);
 	PhysBody* CreatePolygon(int x, int y, int* points, int size, float res, bool isdyn, collider coll, bool is_sensor, category cat);
 	b2RevoluteJoint* CreateRevolutionJoint(PhysBody* bodyA, PhysBody* bodyB, float localAnchorA_x, float localAnchorA_y, float localAnchorB_x, float localAnchorB_y, int reference_angle, int upper_angle, int lower_angle);
 	void CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb);

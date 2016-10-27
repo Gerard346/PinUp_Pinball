@@ -40,7 +40,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	sprintf_s(title, "Multiplier: %02d-Lives: %02d-Score: %08d  ", multiplier, lives/2, score);
+	sprintf_s(title, "Multiplier: %02d-Lives: %02d-Score: %08d  ", multiplier, lives, score);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
@@ -78,6 +78,24 @@ void ModulePlayer::RestartGame() {
 	App->scene_intro->l9 = false;
 	App->scene_intro->l10 = false;
 
+	App->scene_intro->ls = false;
+	App->scene_intro->rs = false;
+	App->scene_intro->leftsensor = false;
+	App->scene_intro->rightsensor = false;
+
+	App->scene_intro->su1 = false;
+	App->scene_intro->su2 = false;
+	App->scene_intro->su3 = false;
+	App->scene_intro->su4 = false;
+	App->scene_intro->s1 = false;
+	App->scene_intro->s2 = false;
+	App->scene_intro->s3 = false;
+	App->scene_intro->s4 = false;
+
+	App->scene_intro->rbutton = false;
+	App->scene_intro->lbutton = false;
+	App->scene_intro->rb = false;
+	App->scene_intro->lb = false;
 }
 
 

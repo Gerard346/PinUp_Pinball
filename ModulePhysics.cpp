@@ -57,7 +57,7 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, collider coll, int rest)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, collider coll, int rest, category cat)
 {
 	b2BodyDef body;
 	if (is_dyn)
@@ -85,6 +85,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, col
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = radius;
 	pbody->listener = App->scene_intro;
+	pbody->category = cat;
 
 	return pbody;
 }
@@ -197,7 +198,7 @@ PhysBody * ModulePhysics::CreatePolygon(int x, int y, int* points, int size, flo
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest, collider coll)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool is_dyn, int rest, collider coll, category cat)
 {
 	b2BodyDef body;
 	if (is_dyn)
@@ -233,6 +234,7 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool i
 	pbody->body = b;
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = 0;
+	pbody->category = cat;
 
 	return pbody;
 }
@@ -500,6 +502,10 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 		break;
 	case SMALLTUB_SENSOR_END:
 		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON | SENSOR;
+		bodyA->body->GetFixtureList()->SetFilterData(filter);
+		break;
+	case SENSOR:
+		filter.maskBits = LEVER;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	}

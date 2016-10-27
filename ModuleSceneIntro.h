@@ -19,6 +19,7 @@ public:
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	bool CreateMap();
 	void playbonusfx();
+	void playbonusfx2();
 	
 public:
 	p2List<PhysBody*> circles;
@@ -69,7 +70,8 @@ public:
 	uint dead_fx;
 	uint collide_fx;
 	uint main_song_fx;
-
+	uint playedwallfx = 0;
+	uint current_time = 0;
 
 	p2Point<int> ray;
 
@@ -81,19 +83,10 @@ public:
 	bool dead = false;
 	bool light1, light2, light3, light4, light5, light6, light7, light8 = false;
 	
+	bool lbutton, rbutton, lb, rb = false;
 	bool su1, su2, su3, su4 = false;
-	
-	bool l1 = false;
-	bool l2 = false;
-	bool l3 = false;
-	bool l4 = false;
-	bool l5 = false;
-	bool l6 = false;
-	bool l7 = false;
-	bool l8 = false;
-	bool l9 = false;
-	bool l10 = false;
-	
+	bool l1, l2, l3, l4, l5, l6, l7, l8, l9, l10 = false;
+	bool leftsensor, rightsensor, ls, rs = false;
 	bool s1, s2, s3, s4 = false;
 
 	bool lost = false;
