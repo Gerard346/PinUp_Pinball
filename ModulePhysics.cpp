@@ -491,7 +491,7 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case BIGTUB_SENSOR_END:
-		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON;
+		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON | SENSOR;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case SMALLTUB_SENSOR:
@@ -499,8 +499,7 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case SMALLTUB_SENSOR_END:
-		//LightSensor 8
-		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON;
+		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON | SENSOR;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	}

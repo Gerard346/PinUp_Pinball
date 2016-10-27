@@ -146,7 +146,7 @@ update_status ModuleSceneIntro::Update()
 	BodyLever_L->GetPosition(x, y);
 	App->renderer->Blit(Lever_L, x - 9, y - 12, NULL, 1.0f, BodyLever_L->GetRotation()-6);
 	BodyLever_R->GetPosition(x, y);
-	App->renderer->Blit(Lever_R, x - 1, y - 12, NULL, 1.0f, BodyLever_R->GetRotation() + 6);
+	App->renderer->Blit(Lever_R, x - 1, y - 10, NULL, 1.0f, BodyLever_R->GetRotation()+6);
 
 	int x1, y1;
 	Piston->GetPosition(x1, y1);
@@ -157,12 +157,7 @@ update_status ModuleSceneIntro::Update()
 	PivotLever_R->body->ApplyForceToCenter(b2Vec2(0, 10), true);
 	Piston->body->ApplyForceToCenter(b2Vec2(0, 10), true);
 	
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
-	{
-		fx_lever_left = false;
-	}
-
+	//flippers
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		if (fx_lever_left == false)
@@ -170,14 +165,8 @@ update_status ModuleSceneIntro::Update()
 			App->audio->PlayFx(lever_fx, 0);
 			fx_lever_left = true;
 		}
-		PivotLever_L->body->ApplyForceToCenter(b2Vec2(0, -90), true);
+		PivotLever_L->body->ApplyForceToCenter(b2Vec2(0, -110), true);
 	}
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
-	{
-		fx_lever_right = false;
-	}
-
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
 		if (fx_lever_right == false)
@@ -185,14 +174,22 @@ update_status ModuleSceneIntro::Update()
 			App->audio->PlayFx(lever_fx, 0);
 			fx_lever_right = true;
 		}
-		PivotLever_R->body->ApplyForceToCenter(b2Vec2(0, -90), true);
+		PivotLever_R->body->ApplyForceToCenter(b2Vec2(0, -110), true);
 	}
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
+	{
+		fx_lever_right = false;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+	{
+		fx_lever_left = false;
+	}
+
+	//ball
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 8, true, BALL));
-		
 	}
-
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && spawned == false)
 	{
 
@@ -203,28 +200,13 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) && spawned == true)
 	{
-	circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
+		circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
 	}
 	if (push == true)
 	{
 		circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
 		push = false;
 	}
-	//
-	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_UP)
-	{
-		fx_lever_left = false;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
-		if (fx_lever_left == false)
-		{
-			App->audio->PlayFx(lever_fx, 0);
-			fx_lever_left = true;
-		}
-		PivotLever_L->body->ApplyForceToCenter(b2Vec2(0, -90), true);
-	}//
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
 	{
 		fx_intro = false;
@@ -238,11 +220,10 @@ update_status ModuleSceneIntro::Update()
 		}
 		Piston->body->ApplyForceToCenter(b2Vec2(0.1f, 0.01f), true);	
 	}
-	else {
-			Piston->body->ApplyForceToCenter(b2Vec2(0.0f, -30.0f), true);
+	else 
+	{
+		Piston->body->ApplyForceToCenter(b2Vec2(0.0f, -30.0f), true);
 	}
-	
-	
 
 	// ray -----------------
 	if(ray_on == true)
@@ -265,7 +246,7 @@ update_status ModuleSceneIntro::Update()
 			App->player->score += 11 * App->player->multiplier;
 			l1 = true;
 		}
-		App->renderer->Blit(light, 207, 265, &light_bulb);
+		App->renderer->Blit(light, 208, 266, &light_bulb);
 	}
 	 if (light2 == true) 
 	{
@@ -275,7 +256,7 @@ update_status ModuleSceneIntro::Update()
 			App->player->score += 11 * App->player->multiplier;
 			l2 = true;
 		}
-		App->renderer->Blit(light, 235, 265, &light_bulb);
+		App->renderer->Blit(light, 236, 266, &light_bulb);
 	}
 	 if (light3 == true) 
 	{
@@ -285,7 +266,7 @@ update_status ModuleSceneIntro::Update()
 			App->player->score += 11 * App->player->multiplier;
 			l3 = true;
 		}
-		App->renderer->Blit(light, 263, 265, &light_bulb);
+		App->renderer->Blit(light, 264, 266, &light_bulb);
 	}
 	 if (light4 == true) 
 	{
@@ -295,7 +276,7 @@ update_status ModuleSceneIntro::Update()
 			App->player->score += 11 * App->player->multiplier;
 			l4 = true;
 		}
-		App->renderer->Blit(light, 291, 265, &light_bulb);
+		App->renderer->Blit(light, 292, 266, &light_bulb);
 	}
 	if (light5 == true)
 	 {
@@ -420,32 +401,26 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		}
 		if (bodyB->category == LIGHT5_SENSOR)
 		{
-
 			App->scene_intro->light5 = true;
 		}
 		if (bodyB->category == LIGHT6_SENSOR)
 		{
-
 			App->scene_intro->light6 = true;
 		}
 		if (bodyB->category == LIGHT7_SENSOR)
 		{
-
 			App->scene_intro->light7 = true;
 		}
 		if (bodyB->category == LIGHT8_SENSOR)
 		{
-
 			App->scene_intro->light8 = true;
 		}
 		if (bodyB->category == LIGHT9_SENSOR)
 		{
-
 			App->scene_intro->light9 = true;
 		}
 		if (bodyB->category == LIGHT10_SENSOR)
 		{
-
 			App->scene_intro->light10 = true;
 		}
 		if (bodyB->category == PUSH_SENSOR)
@@ -458,22 +433,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		}
 		if (bodyB->category == LEFT_SENSOR)
 		{
-
 			App->player->score += 11;
 		}
 		if (bodyB->category == RIGHT_SENSOR)
 		{
-
 			App->player->score += 11;
 		}
 		if (bodyB->category == SU1_SENSOR)
 		{
-
 			App->player->score += 11;
 		}
 		if (bodyB->category == SU2_SENSOR)
 		{
-
 			App->player->score += 11;
 		}
 		if (bodyB->category == BUTTONR_SENSOR)
@@ -932,7 +903,6 @@ bool ModuleSceneIntro::CreateMap()
 		117, 178
 	};
 
-
 	//chains
 	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 134, false, 0.2, MAP));
 	map.add(App->physics->CreateChain(0, 0, topwall, 20, false, 0.2, MAP));
@@ -956,13 +926,13 @@ bool ModuleSceneIntro::CreateMap()
 	App->physics->CreateRectangleSensor(362, 234, 50, 10, BIGTUB_SENSOR_END, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(430, 234, 50, 10, BIGTUB_SENSOR_END, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(65, 622, 20, 10, BIGTUB_SENSOR_END, CHAIN_SENSOR);
-	App->physics->CreateRectangleSensor(179, 246, 50, 30, SMALLTUB_SENSOR, CHAIN_SENSOR);
+	App->physics->CreateRectangleSensor(179, 244, 48, 25, SMALLTUB_SENSOR, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(179, 286, 50, 10, SMALLTUB_SENSOR_END, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(395, 650, 20, 10, SMALLTUB_SENSOR_END, CHAIN_SENSOR);
-	App->physics->CreateRectangleSensor(216, 274, 18, 18, SENSOR, LIGHT1_SENSOR);
-	App->physics->CreateRectangleSensor(244, 274, 18, 18, SENSOR, LIGHT2_SENSOR);
-	App->physics->CreateRectangleSensor(272, 274, 18, 18, SENSOR, LIGHT3_SENSOR);
-	App->physics->CreateRectangleSensor(300, 274, 18, 18, SENSOR, LIGHT4_SENSOR);
+	App->physics->CreateRectangleSensor(216, 251, 18, 18, SENSOR, LIGHT1_SENSOR);
+	App->physics->CreateRectangleSensor(244, 254, 18, 18, SENSOR, LIGHT2_SENSOR);
+	App->physics->CreateRectangleSensor(272, 254, 18, 18, SENSOR, LIGHT3_SENSOR);
+	App->physics->CreateRectangleSensor(300, 251, 18, 18, SENSOR, LIGHT4_SENSOR);
 	App->physics->CreateRectangleSensor(57, 540, 18, 18, SENSOR, LIGHT5_SENSOR);
 	App->physics->CreateRectangleSensor(52, 654, 18, 18, SENSOR, LIGHT6_SENSOR);
 	App->physics->CreateRectangleSensor(396, 540, 18, 18, SENSOR, LIGHT7_SENSOR);
