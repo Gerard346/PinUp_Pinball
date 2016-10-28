@@ -60,6 +60,12 @@ public:
 	PhysBody* Piston;
 	PhysBody* Piston2;
 
+	uint gameover_fx;
+	uint push_fx;
+	uint ramp_fx;
+	uint tub_fx;
+	uint multiplier_fx;
+	uint specialchain_fx;
 	uint intro_fx;
 	uint bonus_fx;
 	uint throw_fx;

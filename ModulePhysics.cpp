@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
+#include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
 #include "ModuleSceneIntro.h"
@@ -76,7 +77,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_dyn, col
 	fixture.filter.categoryBits = coll;
 	fixture.density = 1.0f;
 	fixture.restitution = rest;
-	fixture.filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON | SENSOR | BOUNCER | BALL;
+	fixture.filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON | SENSOR | BOUNCER | BALL | BIGTUB_SENSOR2;
 
 	b->CreateFixture(&fixture);
 
@@ -489,14 +490,21 @@ void ModulePhysics::sensor_collision(PhysBody* bodyA, PhysBody* bodyB)
 	switch (bodyB->body->GetFixtureList()->GetFilterData().categoryBits)
 	{
 	case BIGTUB_SENSOR:
+		App->audio->PlayFx(App->scene_intro->ramp_fx, 0);
 		filter.maskBits = BIGTUB | BIGTUB_SENSOR_END | LEVER | PISTON;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
+	case BIGTUB_SENSOR2:
+		App->audio->PlayFx(App->scene_intro->ramp_fx, 0);
+		filter.maskBits = BIGTUB | BIGTUB_SENSOR_END | LEVER | PISTON | BOUNCER;
+		bodyA->body->GetFixtureList()->SetFilterData(filter);
+		break;
 	case BIGTUB_SENSOR_END:
-		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON | SENSOR;
+		filter.maskBits = MAP | BIGTUB_SENSOR | SMALLTUB_SENSOR | LEVER | PISTON | SENSOR | BIGTUB_SENSOR2;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;
 	case SMALLTUB_SENSOR:
+		App->audio->PlayFx(App->scene_intro->ramp_fx, 0);
 		filter.maskBits = SMALLTUB | SMALLTUB_SENSOR_END | LEVER | PISTON;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 		break;

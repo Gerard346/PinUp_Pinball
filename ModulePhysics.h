@@ -36,7 +36,8 @@ enum category
 	BOUNCE,
 	BALLCAT,
 	FLIPPER,
-	CHAIN
+	CHAIN,
+	SPECIALCHAIN
 };
 
 enum collider
@@ -53,6 +54,7 @@ enum collider
 	PISTON = 512,
 	BOUNCER = 1024,
 	SENSOR = 2048,
+	BIGTUB_SENSOR2 = 4096,
 	NONE = 0
 };
 

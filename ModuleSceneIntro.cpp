@@ -29,12 +29,18 @@ bool ModuleSceneIntro::Start()
 	intro_fx = App->audio->LoadFx("pinball/Fx/intro.wav");
 	bonus_fx = App->audio->LoadFx("pinball/Fx/bonus.wav");
 	throw_fx = App->audio->LoadFx("pinball/Fx/throw.wav");
+	push_fx = App->audio->LoadFx("pinball/Fx/push.wav");
 	lever_fx = App->audio->LoadFx("pinball/Fx/leveror.wav");
 	triangles_fx = App->audio->LoadFx("pinball/Fx/triangles.wav");
 	ding_fx = App->audio->LoadFx("pinball/Fx/ding.wav");
 	bulb_fx = App->audio->LoadFx("pinball/Fx/bulb.wav");
 	dead_fx = App->audio->LoadFx("pinball/Fx/dead.wav");
+	ramp_fx = App->audio->LoadFx("pinball/Fx/ramp.wav");
+	gameover_fx = App->audio->LoadFx("pinball/Fx/gameover.wav");
+	tub_fx = App->audio->LoadFx("pinball/Fx/smalltubfx.wav");
+	multiplier_fx = App->audio->LoadFx("pinball/Fx/multipliersound.wav");
 	collide_fx = App->audio->LoadFx("pinball/Fx/wall.wav");
+	specialchain_fx = App->audio->LoadFx("pinball/Fx/specialchain.wav");
 	main_song_fx = App->audio->LoadFx("pinball/Fx/Main_Song.wav");
 	App->audio->PlayFx(main_song_fx, -1);
 
@@ -191,7 +197,7 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && spawned == false)
 	{
 		App->audio->PlayFx(intro_fx, 0);
-		circles.add(App->physics->CreateCircle(462, 800, 7, true, BALL, 0, BALLCAT));
+		circles.add(App->physics->CreateCircle(462, 800, 8, true, BALL, 0, BALLCAT));
 		circles.getLast()->data->listener = this;
 		spawned = true;	
 	}
@@ -201,7 +207,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (push == true)
 	{
-		App->audio->PlayFx(throw_fx, 0);
+		App->audio->PlayFx(push_fx, 0);
 		circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0.0f, -160.0f), true);
 		push = false;
 	}
@@ -223,7 +229,7 @@ update_status ModuleSceneIntro::Update()
 		Piston->body->ApplyForceToCenter(b2Vec2(0.0f, -50.0f), true);
 	}
 
-	// ray -----------------
+	//ray
 	if(ray_on == true)
 	{
 		fVector destination(mouse.x-ray.x, mouse.y-ray.y);
@@ -400,6 +406,7 @@ update_status ModuleSceneIntro::Update()
 	 //multiplier
 	if (light1 == true && light2 == true && light3 == true && light4 == true)
 	{
+		App->audio->PlayFx(multiplier_fx, 0);
 		light1 = false;
 		light2 = false;
 		light3 = false;
@@ -412,6 +419,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (rbutton == true && lbutton == true)
 	{
+		App->audio->PlayFx(multiplier_fx, 0);
 		rbutton = false;
 		lbutton = false;
 		lb = false;
@@ -420,6 +428,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (su1 == true && su2 == true && su3 == true && su4 == true)
 	{
+		App->audio->PlayFx(multiplier_fx, 0);
 		su1 = false;
 		su2 = false;
 		su3 = false;
@@ -432,6 +441,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (leftsensor == true && rightsensor == true)
 	{
+		App->audio->PlayFx(multiplier_fx, 0);
 		leftsensor = false;
 		rightsensor = false;
 		ls= false;
@@ -450,6 +460,7 @@ update_status ModuleSceneIntro::Update()
 		}
 		else
 		{
+			App->audio->PlayFx(gameover_fx, 0);
 			App->player->RestartGame();
 		}
 	}
@@ -556,6 +567,11 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			playbonusfx2();
 			App->player->score += 100;
+		}
+		if (bodyB->category == SPECIALCHAIN)
+		{
+			App->audio->PlayFx(specialchain_fx, 0);
+			App->player->score += 20;
 		}
 	}
 }
@@ -1006,9 +1022,9 @@ bool ModuleSceneIntro::CreateMap()
 	map.add(App->physics->CreateChain(0, 0, Map_Pinball, 134, false, 0.2, MAP, CHAIN));
 	map.add(App->physics->CreateChain(0, 0, topwall, 20, false, 0.2, MAP, CHAIN));
 	map.add(App->physics->CreateChain(0, 0, down2left, 32, false, 0.2, MAP, CHAIN));
-	map.add(App->physics->CreateChain(0, 0, downleft, 24, false, 2, MAP, CHAIN));
+	map.add(App->physics->CreateChain(0, 0, downleft, 24, false, 2.8, MAP, SPECIALCHAIN));
 	map.add(App->physics->CreateChain(0, 0, right2left, 32, false, 0.2, MAP, CHAIN));
-	map.add(App->physics->CreateChain(0, 0, rightleft, 26, false, 2, MAP, CHAIN));
+	map.add(App->physics->CreateChain(0, 0, rightleft, 26, false, 2.8, MAP, SPECIALCHAIN));
 	map.add(App->physics->CreateChain(0, 0, bigtub, 110, false, 0, BIGTUB, CHAIN));
 	map.add(App->physics->CreateChain(0, 0, bigtub2, 72, false, 0, BIGTUB, CHAIN));
 	map.add(App->physics->CreateChain(0, 0, bigtub3, 60, false, 0, BIGTUB, CHAIN));
@@ -1020,9 +1036,9 @@ bool ModuleSceneIntro::CreateMap()
 	map.add(App->physics->CreateChain(0, 0, smallwall3, 14, false, 0.2, MAP, CHAIN));
 
 	//sensors
-	App->physics->CreateRectangleSensor(430, 212, 50, 20, BIGTUB_SENSOR, CHAIN_SENSOR);
-	App->physics->CreateRectangleSensor(362, 212, 50, 20, BIGTUB_SENSOR, CHAIN_SENSOR);
-	App->physics->CreateRectangleSensor(392, 234, 120, 20, BIGTUB_SENSOR_END, CHAIN_SENSOR);
+	App->physics->CreateRectangleSensor(430, 202, 50, 30, BIGTUB_SENSOR2, CHAIN_SENSOR);
+	App->physics->CreateRectangleSensor(362, 202, 50, 30, BIGTUB_SENSOR, CHAIN_SENSOR);
+	App->physics->CreateRectangleSensor(392, 240, 120, 30, BIGTUB_SENSOR_END, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(65, 622, 20, 10, BIGTUB_SENSOR_END, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(180, 238, 46, 25, SMALLTUB_SENSOR, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(179, 286, 50, 10, SMALLTUB_SENSOR_END, CHAIN_SENSOR);
