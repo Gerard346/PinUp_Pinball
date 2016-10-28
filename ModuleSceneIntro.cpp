@@ -226,7 +226,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	else 
 	{
-		Piston->body->ApplyForceToCenter(b2Vec2(0.0f, -50.0f), true);
+		Piston->body->ApplyForceToCenter(b2Vec2(0.0f, -65.0f), true);
 	}
 
 	//ray
@@ -1036,9 +1036,10 @@ bool ModuleSceneIntro::CreateMap()
 	map.add(App->physics->CreateChain(0, 0, smallwall3, 14, false, 0.2, MAP, CHAIN));
 
 	//sensors
-	App->physics->CreateRectangleSensor(430, 202, 50, 30, BIGTUB_SENSOR2, CHAIN_SENSOR);
+	App->physics->CreateRectangleSensor(432, 202, 55, 30, BIGTUB_SENSOR2, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(362, 202, 50, 30, BIGTUB_SENSOR, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(392, 240, 120, 30, BIGTUB_SENSOR_END, CHAIN_SENSOR);
+	App->physics->CreateRectangleSensor(340, 120, 120, 30, BIGTUB_SENSOR_END, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(65, 622, 20, 10, BIGTUB_SENSOR_END, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(180, 238, 46, 25, SMALLTUB_SENSOR, CHAIN_SENSOR);
 	App->physics->CreateRectangleSensor(179, 286, 50, 10, SMALLTUB_SENSOR_END, CHAIN_SENSOR);
